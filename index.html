@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+        <script defer src="script.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <title>To Do App</title>
+    </head>
+
+
+    <body>
+
+        <!-- Side Navigation Bar -->
+        <div class="side-nav">
+            <div class="side-nav-header">
+                <h1>tasky</h1><img src="images/tasky. logo.png">
+            </div>
+
+            <div style="display:flex; flex-direction:column; width:220px">
+                <ul class="projects-list"></ul>
+                <div class="new-project-container">
+                    <div style="display:flex; align-items:center; flex-direction:row; margin-bottom:10px;">
+                        <button class="new-project-button">+<img src=""></button>
+                        <form>
+                            <input type="text" placeholder="New project" class="new-project-title" maxlength="20">
+                        </form> 
+                    </div>
+                    <div class="icon-select-container">
+                        <button id="development-icon" class="icon-select"><img src="images/pc icon.png"></button>
+                        <button id="design-icon" class="icon-select"><img src="images/brush icon.png"></button>
+                        <button id="school-icon" class="icon-select"><img src="images/school icon.png"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <div class="header">
+            <div class="header-container">
+                <img class="header-icon" src="">
+                <h3 class="header-title"></h3>
+            </div>
+        </div>
+
+        <!-- Main section -->
+        <div class="main-section">
+            <div class="new-task-panel">
+                <form class="new-task-panel-input">
+                    <button class="add-task-button" type="button">+</button>
+                    <input type="text" placeholder="Create a task" maxlength="60">
+                </form>
+                <form class="task-due-date-details">
+                    <i class="bi bi-calendar4-event"></i>
+                    <input type="text" placeholder="Due date" maxlength="10">
+                </form> 
+
+            </div>
+            <ul class="tasks-container">
+                <div class="message-container">
+                    <img src="" class="message-image">  
+                    <p class="message-text"></p>
+                </div>
+            </ul>
+        </div>
+
+        
+
+        <!-- Templates --> 
+
+        <template id="edit-project-template">
+            <div class="edit-project-dropdown">
+                <button class="edit-project-button"><i class="bi bi-three-dots-vertical"></i></button>
+                <div class="edit-project-functions hide">
+                    <button class="edit-project-title-button">Edit</button>
+                    
+                    <button class="delete-project-button">Delete</button>
+                </div>
+            </div>
+        </template>
+
+        <template id="task-template">
+            <li class="task-panel">
+                <label>
+                    <input type="checkbox" class="checkmark">
+                    <span class="checkbox">
+                        <i class="bi bi-check-lg"></i>
+                    </span>
+                    <p class="task-title"></p>
+                </label>
+                <div class="task-due-date">
+                    <p class="task-due-date-text"></p>
+                </div>
+            </li>
+        </template>
+
+    </body>
+</html>
