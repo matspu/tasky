@@ -5,19 +5,25 @@ window.addEventListener("load", () => {
 });
 
 window.addEventListener("click", e => {
-    // if any project is selected
-    /*
+    
     if(e.target.className !== "edit-project-button"){
         element = document.querySelector(".edit-project-functions");
         if(!element.classList.contains("hide")) element.classList.toggle("hide");
+    } 
+    if(e.target !== newTaskPanelInput && e.target !== dueDateIcon && e.target !== dueDateInput){ 
+        newTaskPanelInput.classList.toggle("selected");
+        taskFormAnimationBackwards();
     }
-    */
 
-    // add active class to selected element
-    // if element has class active && clicked outside => toggle hide
-    // make as a universal function
+    
+    
+    
+    
+ 
     
 });
+
+
 
 
 
@@ -122,6 +128,8 @@ function render(){
         renderTasks(selectedProject); 
         messageTasksCompleted();
     }
+
+    
         
     
 
@@ -145,19 +153,20 @@ function renderProjects(){
         const projectElement = document.createElement("li");
         const icon = document.createElement("img");
         const title = document.createElement("p");
-        const infoContainer = document.createElement("div");
+        //const infoContainer = document.createElement("div");
         title.textContent = project.title;
-        title.style.margin = "0px";
-        title.classList.add("test");
-        infoContainer.appendChild(icon);
-        infoContainer.appendChild(title);
-        infoContainer.classList.add("project-info-container");
+        title.classList.add("project-title");
+        //infoContainer.appendChild(icon);
+        //infoContainer.appendChild(title);
+        //infoContainer.classList.add("project-info-container");
         edit = document.importNode(editProjectTemplate, true);
         icon.src = project.icon;
         projectElement.dataset.listId = project.id;
         projectElement.classList.add("project");
         icon.style.textIndent = "100vw";
-        projectElement.appendChild(infoContainer);
+        //projectElement.appendChild(infoContainer);
+        projectElement.appendChild(icon);
+        projectElement.appendChild(title);
         projectsList.appendChild(projectElement);
         if(project.id === selectedProjectId){
             projectElement.classList.add("active-project"); 
@@ -174,12 +183,14 @@ projectsList.addEventListener("click", e => {
         saveAndRender();
     }
     if(e.target.tagName.toLowerCase() === "button"){
+        const selectedProject = projects.find(project => project.id === selectedProjectId); 
         const button = e.target;
-        const li = projectsList.querySelector(".project-info-container");
+        const li = document.querySelector(".active-project");
         const ul = projectsList;
 
         if(button.className === "edit-project-button"){
             button.parentNode.getElementsByClassName("edit-project-functions")[0].classList.toggle("hide"); 
+
         }
 
         if(button.textContent === "Delete"){
@@ -188,20 +199,25 @@ projectsList.addEventListener("click", e => {
             saveAndRender();
             location.reload();
         } else if(button.textContent === "Edit"){
-            const title = document.querySelector(".test");
+            const title = li.querySelector(".project-title");
             const input = document.createElement("input");
+            const form = document.createElement("form");
+            form.appendChild(input);
             input.type = "text";
             input.value = title.textContent;
+            input.maxLength = "14";
             input.classList.add("edit-project-input");
             li.style.pointerEvents = "auto";
-            li.insertBefore(input, title);
+            li.insertBefore(form, title);
             li.removeChild(title);
+            input.focus();
+            form.addEventListener("submit", e => {
+                e.preventDefault();
+                selectedProject.title = input.value;
+                saveAndRender();
+            });
         }  
-    }
-
-    
-
-    
+    } 
 });
 
 
@@ -263,12 +279,16 @@ const newTaskPanelInput = document.querySelector(".new-task-panel-input input");
 const newTaskPanelForm = document.querySelector(".new-task-panel-input");
 
 newTaskPanelInput.addEventListener("click", function() {
-    newTaskPanel.style.opacity = "1";
-    newTaskPanel.style.display = "flex";                 
-    addTaskButton.style.display = "block";
-    dueDateInput.style.display = "none";
-    dueDateIcon.style.display = "block";
-    dueDateDetails.style.display = "flex";
+    newTaskPanelInput.classList.add("selected");
+    if(newTaskPanelInput.classList.contains("selected")){
+        newTaskPanel.style.opacity = "1";
+        newTaskPanel.style.display = "flex";                 
+        addTaskButton.style.display = "block";
+        dueDateInput.style.display = "none";
+        dueDateIcon.style.display = "block";
+        dueDateDetails.style.display = "flex";
+        
+    }
 });
 
 newTaskPanelForm.addEventListener("submit", e => {
@@ -285,12 +305,8 @@ newTaskPanelForm.addEventListener("submit", e => {
     taskFormAnimationBackwards();
 });
 
-/*window.addEventListener('click',function(e){
-    if(e.target != document.querySelector(".main-section")){
-        taskFormAnimationBackwards();
-    }
-});
-*/  
+
+
 
 
 function taskFormAnimationBackwards(){
