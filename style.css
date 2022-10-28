@@ -66,7 +66,7 @@ body{
     align-items: center;
     padding: 9px 12px 9px 12px;
     margin-bottom: 5px;
-    border-radius: 10px;
+    border-radius: 12px;
     cursor: pointer;
     user-select: none;
     font-size: 15px;
@@ -80,14 +80,12 @@ body{
     color:rgba(255, 255, 255, 1);
 }
 
-.project-info-container{
-    display: flex;
-    align-items: center;
-    pointer-events: none;
-}
+
 
 .project-title{
     margin: 0px;
+    line-height: 30px;
+    pointer-events: none;   
 }
 
 .active-project{
@@ -198,6 +196,7 @@ body{
 
 .header-title{
     font-size: 28px;
+    line-height: 40px;
 }
 
 
@@ -452,6 +451,7 @@ body{
     color: white;
     padding: 5px 6px 5px 6px;
     border-radius: 7px;
+    text-align: center;
     cursor: pointer;
     border: none;
 }
@@ -467,14 +467,11 @@ body{
 .edit-project-button:hover{
     background-color: rgba(128, 128, 128, 0.411);
 }
-
-
-
   
 .edit-project-functions{
     position: absolute;
     background-color: #1D2024;
-    min-width: 120px;
+    width: 130px;
     margin-top: 10px;
     overflow: auto;
     border-radius: 10px;
@@ -513,6 +510,7 @@ body{
     color: white;
     padding: 0;
     font-size: 15px;
+    line-height: 30px;
 }
 
 

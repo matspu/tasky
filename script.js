@@ -151,21 +151,18 @@ function render(){
 function renderProjects(){
     projects.forEach(project => {
         const projectElement = document.createElement("li");
-        const icon = document.createElement("img");
+        if(project.icon !== undefined){
+            const icon = document.createElement("img");
+            icon.src = project.icon;
+            icon.style.textIndent = "100vw";
+            projectElement.appendChild(icon);   
+        } 
         const title = document.createElement("p");
-        //const infoContainer = document.createElement("div");
         title.textContent = project.title;
         title.classList.add("project-title");
-        //infoContainer.appendChild(icon);
-        //infoContainer.appendChild(title);
-        //infoContainer.classList.add("project-info-container");
         edit = document.importNode(editProjectTemplate, true);
-        icon.src = project.icon;
         projectElement.dataset.listId = project.id;
         projectElement.classList.add("project");
-        icon.style.textIndent = "100vw";
-        //projectElement.appendChild(infoContainer);
-        projectElement.appendChild(icon);
         projectElement.appendChild(title);
         projectsList.appendChild(projectElement);
         if(project.id === selectedProjectId){
@@ -205,12 +202,12 @@ projectsList.addEventListener("click", e => {
             form.appendChild(input);
             input.type = "text";
             input.value = title.textContent;
-            input.maxLength = "14";
+            input.maxLength = "20";
             input.classList.add("edit-project-input");
-            li.style.pointerEvents = "auto";
             li.insertBefore(form, title);
             li.removeChild(title);
             input.focus();
+            if(input.value == null || input.value.trim() === "") return
             form.addEventListener("submit", e => {
                 e.preventDefault();
                 selectedProject.title = input.value;
@@ -223,15 +220,6 @@ projectsList.addEventListener("click", e => {
 
 
 
-
-/*
-function deleteProject(e){
-    projects = projects.filter(project => project.id !== selectedProjectId);
-    selectedProjectId = null;
-    saveAndRender();
-    location.reload(); // improve
-}
-*/
 
 
 
@@ -349,7 +337,6 @@ dueDateIcon.addEventListener("click", function () {
 
 // confirming-adding tasks
 addTaskButton.addEventListener("click", function () {
-
     const title = newTaskPanelInput.value;
     const dueDate = dueDateInput.value;
     if (title == null || title.trim() === "") return
@@ -400,6 +387,11 @@ function renderHeader(selectedProject){
     newTaskPanel.style.display = "flex";  
     tasksContainer.style.display = "";
     headerTitle.textContent = selectedProject.title;
+    if(selectedProject.icon === undefined){
+        headerIcon.style.display = "none";
+    } else{
+        headerIcon.style.display = "block";
+    }
     headerIcon.src = selectedProject.icon;
 }
 
