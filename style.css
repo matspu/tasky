@@ -80,13 +80,27 @@ body{
     color:rgba(255, 255, 255, 1);
 }
 
-
+.project:hover .project-tasks-count{
+    opacity: 1;
+}
 
 .project-title{
+    font-size: 15px;
     margin: 0px;
     line-height: 30px;
     pointer-events: none;   
 }
+
+.project-tasks-count{
+    font-size: 15px;
+    margin: 0px 8px 0px auto;
+    line-height: 30px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+
 
 .active-project{
     background-color: #272A30;
@@ -233,7 +247,7 @@ body{
     overflow: hidden;
     opacity: 1;
     /*animation: 0.2s deleteTask ease-in;*/
-    
+
 }
 
 @keyframes deleteTask {
@@ -292,7 +306,7 @@ body{
 .task-title {
     margin: 0;
     font-size: 16px;
-    color: rgba(255, 255, 255, 0.9);
+    color:rgba(255, 255, 255, 0.9);
 }
 
 .task-due-date{
@@ -411,6 +425,21 @@ body{
     0%{width: 0px;}
     100%{width: 80px;}    
 }
+.complete-tasks-button{
+    position: absolute;
+    top: 59%;
+    padding: 12px;
+    border-radius: 10px;
+    color: white;
+    background-color: grey;
+    border: none;
+    cursor: pointer;
+}
+.complete-tasks-container{
+    width: 46%;
+    position: absolute;
+    top: 65%;
+}
 
 
 .message-container{    
@@ -448,7 +477,7 @@ body{
 
 .edit-project-button{
     background: none;
-    color: white;
+    color:white;
     padding: 5px 6px 5px 6px;
     border-radius: 7px;
     text-align: center;
@@ -481,23 +510,28 @@ body{
 }
   
   .edit-project-functions button{
-    display: block;
-    padding: 10px 12px;
+    display: flex;
+    padding: 10px;
     width: 120px;
     margin: 0;
-    color: white;
+    color:rgba(255, 255, 255, 0.8);
     background-color: #1D2024;
     text-align: left;
     border-radius: 8px;
     border: none;
     font-size: 14px;
-    cursor: pointer
+    cursor: pointer;
 }
   
 .edit-project-functions button:hover{
      background-color: #272A30;
 }
-  
+
+.edit-project-functions svg{
+    color: rgba(255, 255, 255, 0.8);
+    margin-right: 10px;
+}
+
 
 .hide{
     display: none;

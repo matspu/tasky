@@ -16,11 +16,6 @@ window.addEventListener("click", e => {
     }
 
     
-    
-    
-    
- 
-    
 });
 
 
@@ -28,11 +23,6 @@ window.addEventListener("click", e => {
 
 
 
-
-
-//confetti(); 
-
-const LOCAL_STORAGE_TASKS_KEY = "LOCAL_STORAGE_TASKS_KEY";
 const LOCAL_STORAGE_SELECTED_PROJECT_ID_KEY = "LOCAL_STORAGE_SELECTED_PROJECT_ID_KEY";
 
 
@@ -53,10 +43,12 @@ const deleteProjectButton = document.querySelector(".delete-project-button");
 const editProjectTitleButton = document.querySelector(".edit-project-title-button");
 
 const taskTemplate = document.getElementById("task-template").content;
-
+const completeTaskTemplate = document.getElementById("complete-task-template").content;
 
 const taskPanel = document.querySelector(".task-panel");
 const tasksContainer = document.querySelector(".tasks-container");
+const completeTasksButton = document.querySelector(".complete-tasks-button");
+const completeTasksContainer = document.querySelector(".complete-tasks-container");
 
 let iconSource;
 let blankIcon;
@@ -78,7 +70,6 @@ $(".icon-select").click(function(){
     iconSource.toString();
     document.querySelector(".icon-select-container").style.visibility = "hidden";          // improve showing elements
 });
-
 
 
 
@@ -124,32 +115,22 @@ function render(){
         return;
     } else{
         clearElement(tasksContainer);
+        clearElement(completeTasksContainer);
         renderHeader(selectedProject);
         renderTasks(selectedProject); 
+        renderCompleteTasks(selectedProject);
         messageTasksCompleted();
     }
-
-    
-        
-    
-
-
-
-    
-    /*
-    if(selectedProjectId == null || selectedProjectId == undefined){
-        newTaskPanel.style.display = "none"; 
-        document.querySelector(".header-container").style.display = "none";
-    } 
-    */
-   
- 
 }
+
+completeTasksButton.addEventListener("click", e => {
+    completeTasksContainer.classList.toggle("hide");
+});
 
 
 
 function renderProjects(){
-    projects.forEach(project => {
+    projects.forEach(project => {                                       
         const projectElement = document.createElement("li");
         if(project.icon !== undefined){
             const icon = document.createElement("img");
@@ -160,17 +141,25 @@ function renderProjects(){
         const title = document.createElement("p");
         title.textContent = project.title;
         title.classList.add("project-title");
+        const tasksCount = document.createElement("p");
+        const incompleteTaskCount = project.tasks.filter(task => !task.complete).length;
+        tasksCount.textContent = incompleteTaskCount;
+        tasksCount.classList.add("project-tasks-count");
         edit = document.importNode(editProjectTemplate, true);
         projectElement.dataset.listId = project.id;
         projectElement.classList.add("project");
         projectElement.appendChild(title);
+        projectElement.appendChild(tasksCount);
         projectsList.appendChild(projectElement);
         if(project.id === selectedProjectId){
             projectElement.classList.add("active-project"); 
             projectElement.appendChild(edit);
-        }
+            tasksCount.style.opacity = "0";
+        } 
     });
 }
+
+
 
 
 
@@ -187,15 +176,14 @@ projectsList.addEventListener("click", e => {
 
         if(button.className === "edit-project-button"){
             button.parentNode.getElementsByClassName("edit-project-functions")[0].classList.toggle("hide"); 
-
         }
 
-        if(button.textContent === "Delete"){
+        if(button.textContent.includes("Delete")){
             projects = projects.filter(project => project.id !== selectedProjectId);
             selectedProjectId = null;
             saveAndRender();
             location.reload();
-        } else if(button.textContent === "Edit"){
+        } else if(button.textContent.includes("Edit")){
             const title = li.querySelector(".project-title");
             const input = document.createElement("input");
             const form = document.createElement("form");
@@ -216,20 +204,6 @@ projectsList.addEventListener("click", e => {
         }  
     } 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -360,12 +334,26 @@ function renderTasks(selectedProject){
         checkbox.id = task.id;
         checkbox.checked = task.complete;  
         const label = taskElement.querySelector("label");
+        label.classList.add("task-title");
         label.htmlFor = task.id;
         label.append(task.title);
         const dueDate = taskElement.querySelector(".task-due-date-text");         
         if (task.dueDate == null || task.dueDate.trim() === "") taskElement.querySelector(".task-due-date").style.visibility = "hidden";
         dueDate.append(task.dueDate);
         tasksContainer.appendChild(taskElement);
+    });
+}
+function renderCompleteTasks(selectedProject){
+    const completeTasks = selectedProject.tasks.filter(task => task.complete);
+    completeTasks.forEach(task => {
+        const taskElement = document.importNode(completeTaskTemplate, true); 
+        const label = taskElement.querySelector("label");
+        label.classList.add("task-title");
+        label.append(task.title);
+        const dueDate = taskElement.querySelector(".task-due-date-text");
+        if (task.dueDate == null || task.dueDate.trim() === "") taskElement.querySelector(".task-due-date").style.visibility = "hidden";
+        dueDate.append(task.dueDate);
+        completeTasksContainer.appendChild(taskElement);
     });
 }
 
@@ -376,7 +364,7 @@ tasksContainer.addEventListener("click", e => {
         const selectedTask = selectedProject.tasks.find(task => task.id === e.target.id);
         selectedTask.complete = e.target.checked;
         //selectedProject.tasks = selectedProject.tasks.filter(task => !task.complete);
-        saveAndRender();   //  was saveAndRender();
+        saveAndRender();  //  was saveAndRender();
         //setTimeout(saveAndRender, 1500);     // add fade out animation
     }
 });
