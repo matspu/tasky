@@ -189,7 +189,6 @@ body{
 
 .header{
     display: flex;
-    justify-content: space-between;
     align-items: center;
     padding: 70px 300px 70px;
     background-color: #131517;
@@ -213,6 +212,20 @@ body{
     line-height: 40px;
 }
 
+.delete-complete-tasks-button{
+    display: flex;
+    border: none;
+    background-color: transparent;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: auto;
+    color: rgba(255, 255, 255, 0.651);
+    cursor: pointer;
+}
+
+.delete-complete-tasks-button:hover{
+    background-color: rgba(255, 255, 255, 0.164);
+}
 
 /* -- Main Section -- */
 
@@ -247,7 +260,6 @@ body{
     overflow: hidden;
     opacity: 1;
     /*animation: 0.2s deleteTask ease-in;*/
-
 }
 
 @keyframes deleteTask {
@@ -425,21 +437,6 @@ body{
     0%{width: 0px;}
     100%{width: 80px;}    
 }
-.complete-tasks-button{
-    position: absolute;
-    top: 59%;
-    padding: 12px;
-    border-radius: 10px;
-    color: white;
-    background-color: grey;
-    border: none;
-    cursor: pointer;
-}
-.complete-tasks-container{
-    width: 46%;
-    position: absolute;
-    top: 65%;
-}
 
 
 .message-container{    
@@ -538,7 +535,7 @@ body{
 }
 
 .edit-project-input{
-    width: 120px;
+    width: 100px;
     background-color: transparent;
     border: none;
     color: white;

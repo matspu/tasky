@@ -29,7 +29,7 @@ const LOCAL_STORAGE_SELECTED_PROJECT_ID_KEY = "LOCAL_STORAGE_SELECTED_PROJECT_ID
 const projectsList = document.querySelector(".projects-list");
 
 
-
+const header = document.querySelector(".header");
 const headerTitle = document.querySelector(".header-title");
 const headerIcon = document.querySelector(".header-icon");
 
@@ -42,13 +42,13 @@ const editProjectFunctions = document.querySelector(".edit-project-functions");
 const deleteProjectButton = document.querySelector(".delete-project-button");
 const editProjectTitleButton = document.querySelector(".edit-project-title-button");
 
+const deleteCompleteTasksButton = document.querySelector(".delete-complete-tasks-button");
+
 const taskTemplate = document.getElementById("task-template").content;
-const completeTaskTemplate = document.getElementById("complete-task-template").content;
 
 const taskPanel = document.querySelector(".task-panel");
 const tasksContainer = document.querySelector(".tasks-container");
-const completeTasksButton = document.querySelector(".complete-tasks-button");
-const completeTasksContainer = document.querySelector(".complete-tasks-container");
+
 
 let iconSource;
 let blankIcon;
@@ -61,7 +61,7 @@ let blankIcon;
 const newProjectInput = document.querySelector(".new-project-title");
 const newProjectForm = document.querySelector(".new-project-container form");
 const newProjectButton = document.querySelector(".new-project-button");
-let projects = JSON.parse(localStorage.getItem("projects")) || [];     // change to more professional way
+let projects = JSON.parse(localStorage.getItem("projects")) || [];    
 let selectedProjectId = localStorage.getItem(LOCAL_STORAGE_SELECTED_PROJECT_ID_KEY);
 
 // new project customization
@@ -109,23 +109,23 @@ function render(){
     const selectedProject = projects.find(project => project.id === selectedProjectId); 
     if(projects.length === 0){
         messageCreateProject();
-    } 
-
+    }
     if(selectedProject == null){
-        return;
+        header.style.display = "none";
     } else{
         clearElement(tasksContainer);
-        clearElement(completeTasksContainer);
         renderHeader(selectedProject);
+        header.style.display = "flex";
         renderTasks(selectedProject); 
-        renderCompleteTasks(selectedProject);
         messageTasksCompleted();
     }
 }
 
-completeTasksButton.addEventListener("click", e => {
-    completeTasksContainer.classList.toggle("hide");
-});
+
+
+
+
+
 
 
 
@@ -225,6 +225,12 @@ newProjectButton.addEventListener("click", function(){
         iconSelectContainer.style.visibility = "visible";
     }
 });
+
+deleteCompleteTasksButton.addEventListener("click", e => {
+    const selectedProject = projects.find(project => project.id === selectedProjectId);
+    selectedProject.tasks = selectedProject.tasks.filter(task => !task.complete);
+    saveAndRender();
+})
 
 
 
@@ -327,6 +333,8 @@ addTaskButton.addEventListener("click", function () {
 
 
 
+
+
 function renderTasks(selectedProject){                   
     selectedProject.tasks.forEach(task => {
         const taskElement = document.importNode(taskTemplate, true);
@@ -343,19 +351,7 @@ function renderTasks(selectedProject){
         tasksContainer.appendChild(taskElement);
     });
 }
-function renderCompleteTasks(selectedProject){
-    const completeTasks = selectedProject.tasks.filter(task => task.complete);
-    completeTasks.forEach(task => {
-        const taskElement = document.importNode(completeTaskTemplate, true); 
-        const label = taskElement.querySelector("label");
-        label.classList.add("task-title");
-        label.append(task.title);
-        const dueDate = taskElement.querySelector(".task-due-date-text");
-        if (task.dueDate == null || task.dueDate.trim() === "") taskElement.querySelector(".task-due-date").style.visibility = "hidden";
-        dueDate.append(task.dueDate);
-        completeTasksContainer.appendChild(taskElement);
-    });
-}
+
 
 
 tasksContainer.addEventListener("click", e => {
@@ -364,10 +360,12 @@ tasksContainer.addEventListener("click", e => {
         const selectedTask = selectedProject.tasks.find(task => task.id === e.target.id);
         selectedTask.complete = e.target.checked;
         //selectedProject.tasks = selectedProject.tasks.filter(task => !task.complete);
-        saveAndRender();  //  was saveAndRender();
+        saveAndRender(); 
         //setTimeout(saveAndRender, 1500);     // add fade out animation
     }
 });
+
+
 
 
 function renderHeader(selectedProject){
