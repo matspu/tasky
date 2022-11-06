@@ -24,6 +24,7 @@ window.addEventListener("click", e => {
 
 
 const LOCAL_STORAGE_SELECTED_PROJECT_ID_KEY = "LOCAL_STORAGE_SELECTED_PROJECT_ID_KEY";
+const LOCAL_STORAGE_ONE_COMPLETE_TASK_KEY = "LOCAL_STORAGE_ONE_COMPLETE_TASK_KEY";
 
 
 const projectsList = document.querySelector(".projects-list");
@@ -64,6 +65,7 @@ const newProjectButton = document.querySelector(".new-project-button");
 let projects = JSON.parse(localStorage.getItem("projects")) || [];    
 let selectedProjectId = localStorage.getItem(LOCAL_STORAGE_SELECTED_PROJECT_ID_KEY);
 
+
 // new project customization
 $(".icon-select").click(function(){
     iconSource = $(this).find("img").attr("src");
@@ -90,7 +92,8 @@ function createProject(title){
         title: title,
         icon: iconSource,
         id: Date.now().toString(),
-        tasks: []
+        tasks: [],
+        oneCompleteTask: false
     }
 }
 function saveAndRender(){
@@ -335,7 +338,7 @@ addTaskButton.addEventListener("click", function () {
 
 
 
-function renderTasks(selectedProject){                   
+function renderTasks(selectedProject){                 
     selectedProject.tasks.forEach(task => {
         const taskElement = document.importNode(taskTemplate, true);
         const checkbox = taskElement.querySelector(".checkmark");
@@ -359,6 +362,7 @@ tasksContainer.addEventListener("click", e => {
         const selectedProject = projects.find(project => project.id === selectedProjectId);
         const selectedTask = selectedProject.tasks.find(task => task.id === e.target.id);
         selectedTask.complete = e.target.checked;
+        if(selectedTask.complete) selectedProject.oneCompleteTask = true;
         //selectedProject.tasks = selectedProject.tasks.filter(task => !task.complete);
         saveAndRender(); 
         //setTimeout(saveAndRender, 1500);     // add fade out animation
@@ -399,7 +403,7 @@ function messageTasksCompleted(){
     const selectedProject = projects.find(project => project.id === selectedProjectId);
     const incompleteTasks = selectedProject.tasks.filter(task => !task.complete).length;
     const completeTasks = selectedProject.tasks.filter(task => task.complete).length;
-    if(incompleteTasks === 0 && completeTasks >= 1){
+    if(incompleteTasks === 0 && selectedProject.oneCompleteTask && completeTasks === 0){
         const messageContainer = document.createElement("div");
         const text = document.createTextNode("You've completed all tasks");
         const image = new Image();

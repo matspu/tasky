@@ -190,7 +190,7 @@ body{
 .header{
     display: flex;
     align-items: center;
-    padding: 70px 300px 70px;
+    padding: 70px 18% 70px;
     background-color: #131517;
     margin-left: 300px;
 }   
@@ -231,7 +231,7 @@ body{
 
 .main-section{
     margin-left: 300px;
-    padding: 0px 300px 0px;
+    padding: 0px 18% 0px;
     height: 100vh;
     overflow-block: hidden;
     background-color: #131517;   /*111315*/
@@ -374,7 +374,7 @@ body{
 }
 
 .add-task-button:hover {
-    background-color: #1e1e2c67;
+    background-color: #1a1c1ea6;
 }
 
 @keyframes addTask {
