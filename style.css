@@ -231,7 +231,7 @@ body{
 
 .main-section{
     margin-left: 300px;
-    padding: 0px 18% 0px;
+    padding: 0px 18vw 0px;   
     height: 100vh;
     overflow-block: hidden;
     background-color: #131517;   /*111315*/
@@ -356,6 +356,7 @@ body{
     display: flex;
     align-items: center;
     height: 30px;
+    width: 90%;
 }
 
 .add-task-button{
@@ -388,7 +389,7 @@ body{
 }
 
 .new-task-panel input{
-    width: 30em;
+    width: 90%;
     background-color: #2d2d4400;
     border: none;
     color: rgba(255, 255, 255, 0.9);
@@ -399,7 +400,6 @@ body{
 .new-task-panel input::placeholder{
     color: rgba(255, 255, 255, 0.418);
 }
-
 
 .task-due-date-details{
     align-items: center;
