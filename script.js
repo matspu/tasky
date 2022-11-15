@@ -14,9 +14,8 @@ window.addEventListener("click", e => {
         newTaskPanelInput.classList.toggle("selected");
         taskFormAnimationBackwards();
     }
-
-    
 });
+
 
 
 
@@ -53,6 +52,11 @@ const tasksContainer = document.querySelector(".tasks-container");
 
 let iconSource;
 let blankIcon;
+
+let editingTaskTitle = false;
+
+const groupTasksTemplate = document.getElementById("group-tasks-template").content;
+const newGroupButton = document.querySelector(".new-group-button");
 
 
 
@@ -93,6 +97,7 @@ function createProject(title){
         icon: iconSource,
         id: Date.now().toString(),
         tasks: [],
+        groups: [],
         oneCompleteTask: false
     }
 }
@@ -120,6 +125,7 @@ function render(){
         renderHeader(selectedProject);
         header.style.display = "flex";
         renderTasks(selectedProject); 
+        renderGroups(selectedProject);
         messageTasksCompleted();
     }
 }
@@ -291,7 +297,7 @@ function taskFormAnimationBackwards(){
 
 function createTask(title, dueDate){
     return {
-        title: title, 
+        title: title,
         complete: false,
         dueDate: dueDate,
         id: Date.now().toString()
@@ -342,18 +348,95 @@ function renderTasks(selectedProject){
     selectedProject.tasks.forEach(task => {
         const taskElement = document.importNode(taskTemplate, true);
         const checkbox = taskElement.querySelector(".checkmark");
+        const title = taskElement.querySelector(".task-title");
         checkbox.id = task.id;
         checkbox.checked = task.complete;  
         const label = taskElement.querySelector("label");
-        label.classList.add("task-title");
         label.htmlFor = task.id;
-        label.append(task.title);
+        title.append(task.title);
         const dueDate = taskElement.querySelector(".task-due-date-text");         
         if (task.dueDate == null || task.dueDate.trim() === "") taskElement.querySelector(".task-due-date").style.visibility = "hidden";
         dueDate.append(task.dueDate);
         tasksContainer.appendChild(taskElement);
     });
 }
+
+function newGroup(){
+    const group = createGroup();
+    const selectedProject = projects.find(project => project.id === selectedProjectId);
+    selectedProject.groups.push(group);
+    saveAndRender();
+}
+function createGroup(){
+    return {
+        id: Date.now().toString(),
+        tasks: []
+    }
+}
+
+function createGroupTask(){
+    return {
+        title: "default text", 
+        complete: false,
+        id: Date.now().toString()
+    }
+}
+
+
+function renderGroups(selectedProject){
+    selectedProject.groups.forEach(group => {
+        const groupElement = document.importNode(groupTasksTemplate, true);
+        const arrow = groupElement.querySelector(".group-tasks-dropdown-arrow");
+        const container = groupElement.querySelector(".group-tasks-container");
+        const plus = groupElement.querySelector(".group-tasks-dropdown-plus");
+
+        arrow.id = group.id;
+        
+        groupElement.appendChild(container);
+        tasksContainer.appendChild(groupElement);
+
+        arrow.addEventListener("click", e => {
+            selectedGroup = selectedProject.groups.find(group => group.id === e.target.id);
+            renderGroupsTasks(selectedGroup, container);
+            arrow.classList.toggle("arrow-down");
+            container.classList.toggle("hide");
+            plus.classList.toggle("hide");  // save to local host then load state and render 
+        });
+        plus.addEventListener("click", e => {
+            const task = createGroupTask();
+            selectedGroup.tasks.push(task);
+            saveAndRender();
+        }); 
+    });
+}
+
+
+function renderGroupsTasks(selectedGroup, container){
+    clearElement(container);
+    selectedGroup.tasks.forEach(task => {
+        const taskElement = document.importNode(taskTemplate, true);
+        const checkbox = taskElement.querySelector(".checkmark");
+        const title = taskElement.querySelector(".task-title");
+        checkbox.id = task.id;
+        checkbox.checked = task.complete;  
+        const label = taskElement.querySelector("label");
+        label.htmlFor = task.id;
+        title.append(task.title);
+        const dueDate = taskElement.querySelector(".task-due-date-text");  
+        if (task.dueDate == null || task.dueDate.trim() === "") taskElement.querySelector(".task-due-date").style.visibility = "hidden";       
+        dueDate.append(task.dueDate);
+        container.appendChild(taskElement);
+    });
+}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -366,8 +449,34 @@ tasksContainer.addEventListener("click", e => {
         //selectedProject.tasks = selectedProject.tasks.filter(task => !task.complete);
         saveAndRender(); 
         //setTimeout(saveAndRender, 1500);     // add fade out animation
-    }
+    } else if(e.target.className === "task-title"){
+        const selectedProject = projects.find(project => project.id === selectedProjectId);
+        const selectedTask = selectedProject.tasks.find(task => task.title === e.target.textContent);
+        const li = e.target.parentNode;
+        const title = e.target;
+        const input = document.createElement("input");
+        const form = document.createElement("form");
+        input.classList.add("edit-task-title-input");
+        form.appendChild(input);
+        input.type = "text";
+        input.value = title.textContent;
+        input.maxLength = "60";
+        li.insertBefore(form, title);
+        li.removeChild(title);
+        input.focus(); 
+        if(input.value == null && input.value.trim() === "") return
+        form.addEventListener("submit", e => {
+            e.preventDefault();
+            selectedTask.title = input.value;
+            saveAndRender();
+        });
+    } 
+
 });
+
+
+
+
 
 
 
@@ -422,6 +531,7 @@ function messageTasksCompleted(){
 $(".checkmark").click(function() {
    alert($(this).attr("class"));
 });
+
 
 
 

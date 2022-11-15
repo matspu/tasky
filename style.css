@@ -208,6 +208,7 @@ body{
 }
 
 .header-title{
+    font-weight: 600;
     font-size: 28px;
     line-height: 40px;
 }
@@ -249,7 +250,6 @@ body{
 
 .task-panel{
     display: flex;
-    justify-content: space-between;
     align-items: center;
     padding: 12px 16px 12px;
     background-color: #272A30;
@@ -272,7 +272,7 @@ body{
     align-items: center;
 }
 
-.task-panel input{
+.checkmark{
     position: absolute;
     transform: scale(0);
 }
@@ -297,9 +297,9 @@ body{
     transform: scale(0);
     color: rgba(255, 255, 255, 0.8);
     font-size: 18px;
-    margin-top: 2px;
     animation: checkbox 0.4s linear forwards;
 }
+
 
 @keyframes checkbox{
     50% {transform: scale(1.4);}
@@ -307,15 +307,21 @@ body{
     100% {transform: scale(1);}
 }
 
-.task-panel input:checked ~ .checkbox{
+.checkmark:checked ~ .checkbox{
     background-color: #1a1c1e8c;
 }
 
-.task-panel input:checked ~ .checkbox i{ 
+.checkmark:checked ~ .checkbox i{ 
     display: block;
 }
 
-.task-title {
+.task-panel label{
+    font-size: 16px;
+    color:rgba(255, 255, 255, 0.9);
+}
+
+.task-title{
+    display: flex;
     margin: 0;
     font-size: 16px;
     color:rgba(255, 255, 255, 0.9);
@@ -327,7 +333,7 @@ body{
     padding: 6px;
     background-color: #1a1c1e8c;
     border-radius: 10px;
-    margin-left: 5px;
+    margin-left: auto;
 }
 
 .task-due-date-text{
@@ -543,6 +549,98 @@ body{
     font-size: 15px;
     line-height: 30px;
 }
+
+.task-panel form{
+    width: 90%;
+}
+
+.edit-task-title-input{
+    display: flex;
+    width: 90%;
+    background-color: transparent;
+    border: none;
+    color:rgba(255, 255, 255, 0.9);
+    padding: 0;
+    font-size: 16px;
+}
+
+
+/*
+    organise 
+*/
+
+.new-group-button{
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.212);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.group-tasks{
+    display: flex;
+    flex-direction: column;
+    padding: 8px 16px 8px;
+    /*background-color: #272A30;
+    border-radius: 1.2rem;
+    font-size: 16px;
+    margin-bottom: 10px;
+    list-style: none;
+    overflow: hidden;
+    opacity: 1;
+    */
+}
+
+.group-tasks-dropdown{
+    display: flex;
+    align-content: center;
+}
+
+.group-tasks-dropdown label{
+    cursor: pointer;
+}
+
+.group-tasks-dropdown-arrow{
+    transform: rotate(270deg);
+    font-size: 14px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.group-tasks-dropdown-arrow i{
+    pointer-events: none;
+    font-size: 12px;
+}
+
+.arrow-down{
+    margin-top: 3px;        
+    transform: rotate(0deg);
+}
+
+.group-tasks-dropdown-plus{
+    border-radius: 10px;
+    margin-left: auto;
+    padding: 1px 3px;
+    cursor: pointer;
+}
+
+.group-tasks-dropdown-plus:hover{
+    background-color:rgba(255, 255, 255, 0.4);
+}
+
+.group-title{
+    display: flex;
+    margin: 0;
+    font-size: 18px;
+    color:rgba(255, 255, 255, 0.9);
+}
+
+.group-tasks-container{
+    padding: 0px 40px;
+
+}
+
 
 
 
