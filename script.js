@@ -24,6 +24,7 @@ window.addEventListener("click", e => {
 
 const LOCAL_STORAGE_SELECTED_PROJECT_ID_KEY = "LOCAL_STORAGE_SELECTED_PROJECT_ID_KEY";
 const LOCAL_STORAGE_ONE_COMPLETE_TASK_KEY = "LOCAL_STORAGE_ONE_COMPLETE_TASK_KEY";
+const LOCAL_STORAGE_SELECTED_GROUP_ID_KEY = "LOCAL_STORAGE_SELECTED_GROUP_ID_KEY";
 
 
 const projectsList = document.querySelector(".projects-list");
@@ -68,6 +69,7 @@ const newProjectForm = document.querySelector(".new-project-container form");
 const newProjectButton = document.querySelector(".new-project-button");
 let projects = JSON.parse(localStorage.getItem("projects")) || [];    
 let selectedProjectId = localStorage.getItem(LOCAL_STORAGE_SELECTED_PROJECT_ID_KEY);
+let selectedGroupId = localStorage.getItem(LOCAL_STORAGE_SELECTED_GROUP_ID_KEY);
 
 
 // new project customization
@@ -109,6 +111,7 @@ function saveAndRender(){
 function save(){
     localStorage.setItem("projects", JSON.stringify(projects));
     localStorage.setItem(LOCAL_STORAGE_SELECTED_PROJECT_ID_KEY, selectedProjectId);
+    localStorage.setItem(LOCAL_STORAGE_SELECTED_GROUP_ID_KEY, selectedGroupId);
 }
 
 function render(){          
@@ -228,11 +231,7 @@ function clearElement(element){
 
 newProjectButton.addEventListener("click", function(){
     const iconSelectContainer = document.querySelector(".icon-select-container");
-    if(iconSelectContainer.style.visibility === "visible"){
-        iconSelectContainer.style.visibility = "hidden";
-    } else{
-        iconSelectContainer.style.visibility = "visible";
-    }
+    iconSelectContainer.classList.toggle("hide");
 });
 
 deleteCompleteTasksButton.addEventListener("click", e => {
@@ -240,6 +239,8 @@ deleteCompleteTasksButton.addEventListener("click", e => {
     selectedProject.tasks = selectedProject.tasks.filter(task => !task.complete);
     saveAndRender();
 })
+
+// hello and welcome
 
 
 
@@ -370,6 +371,7 @@ function newGroup(){
 function createGroup(){
     return {
         id: Date.now().toString(),
+        enabled: false,
         tasks: []
     }
 }
@@ -389,21 +391,43 @@ function renderGroups(selectedProject){
         const arrow = groupElement.querySelector(".group-tasks-dropdown-arrow");
         const container = groupElement.querySelector(".group-tasks-container");
         const plus = groupElement.querySelector(".group-tasks-dropdown-plus");
-
         arrow.id = group.id;
-        
         groupElement.appendChild(container);
         tasksContainer.appendChild(groupElement);
 
-        arrow.addEventListener("click", e => {
-            selectedGroup = selectedProject.groups.find(group => group.id === e.target.id);
-            renderGroupsTasks(selectedGroup, container);
+        if(group.enabled){
+            const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
+            container.style.display = "block";
             arrow.classList.toggle("arrow-down");
-            container.classList.toggle("hide");
-            plus.classList.toggle("hide");  // save to local host then load state and render 
+            plus.classList.toggle("hide");
+            // render only one selectedGroup tasks whenever multiple groups are selected
+            renderGroupsTasks(selectedGroup, container);
+        } else{
+            container.style.display = "none";
+        }
+
+        arrow.addEventListener("click", e => {
+            selectedGroupId = e.target.id;
+            const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
+            arrow.classList.toggle("arrow-down");
+            //container.classList.toggle("hide");
+            plus.classList.toggle("hide");
+
+            if(container.style.display === "block"){
+                container.style.display = "none";
+                group.enabled = false;
+            } else{
+                container.style.display = "block";
+                group.enabled = true;
+            }
+            renderGroupsTasks(selectedGroup, container);
+            save();
         });
         plus.addEventListener("click", e => {
             const task = createGroupTask();
+            // create a task only here inside of selectedGroup
+            const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
+            console.log(selectedGroup);
             selectedGroup.tasks.push(task);
             saveAndRender();
         }); 
@@ -413,9 +437,11 @@ function renderGroups(selectedProject){
 
 function renderGroupsTasks(selectedGroup, container){
     clearElement(container);
+    console.log(selectedGroup)
     selectedGroup.tasks.forEach(task => {
         const taskElement = document.importNode(taskTemplate, true);
         const checkbox = taskElement.querySelector(".checkmark");
+        checkbox.classList.add("checkbox-group-task");
         const title = taskElement.querySelector(".task-title");
         checkbox.id = task.id;
         checkbox.checked = task.complete;  
@@ -431,8 +457,9 @@ function renderGroupsTasks(selectedGroup, container){
 
 
 
-
-
+//  BIG ANNOTATION
+//      when multiple groups are selected => adds task to all selected groups
+//  make sure to have stored in LocalStorage only one selectedGroup
 
 
 
@@ -442,16 +469,25 @@ function renderGroupsTasks(selectedGroup, container){
 
 tasksContainer.addEventListener("click", e => {
     if(e.target.tagName.toLowerCase() === "input"){
-        const selectedProject = projects.find(project => project.id === selectedProjectId);
-        const selectedTask = selectedProject.tasks.find(task => task.id === e.target.id);
-        selectedTask.complete = e.target.checked;
-        if(selectedTask.complete) selectedProject.oneCompleteTask = true;
-        //selectedProject.tasks = selectedProject.tasks.filter(task => !task.complete);
+        if(e.target.classList.contains("checkbox-group-task")){
+            const selectedProject = projects.find(project => project.id === selectedProjectId);
+            const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
+            const selectedGroupTask = selectedGroup.tasks.find(task => task.id === e.target.id);
+            console.log(selectedGroupTask)
+            selectedGroupTask.complete = e.target.checked;
+        } else{
+            const selectedProject = projects.find(project => project.id === selectedProjectId);
+            const selectedTask = selectedProject.tasks.find(task => task.id === e.target.id);
+            selectedTask.complete = e.target.checked;
+            if(selectedTask.complete) selectedProject.oneCompleteTask = true;
+        }
         saveAndRender(); 
+        //selectedProject.tasks = selectedProject.tasks.filter(task => !task.complete);
         //setTimeout(saveAndRender, 1500);     // add fade out animation
-    } else if(e.target.className === "task-title"){
+    } else if(e.target.classList.contains("task-title")){
         const selectedProject = projects.find(project => project.id === selectedProjectId);
         const selectedTask = selectedProject.tasks.find(task => task.title === e.target.textContent);
+        const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
         const li = e.target.parentNode;
         const title = e.target;
         const input = document.createElement("input");
@@ -467,7 +503,11 @@ tasksContainer.addEventListener("click", e => {
         if(input.value == null && input.value.trim() === "") return
         form.addEventListener("submit", e => {
             e.preventDefault();
-            selectedTask.title = input.value;
+            if(e.target.classList.contains("group-title")){
+                selectedGroup.title = input.value;
+            } else{
+                selectedTask.title = input.value;
+            }
             saveAndRender();
         });
     } 

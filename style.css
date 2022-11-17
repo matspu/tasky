@@ -165,7 +165,6 @@ body{
 
 .icon-select-container{
     display: flex;
-    visibility: hidden;
     border-radius: 10px;
     padding: 10px;
     border: 2px solid #272a30d7;
@@ -637,6 +636,7 @@ body{
 }
 
 .group-tasks-container{
+    display: none;
     padding: 0px 40px;
 
 }
