@@ -219,6 +219,7 @@ body{
     padding: 10px;
     border-radius: 10px;
     margin-left: auto;
+    margin-right: 5px;
     color: rgba(255, 255, 255, 0.651);
     cursor: pointer;
 }
