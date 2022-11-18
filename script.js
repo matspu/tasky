@@ -1,5 +1,4 @@
 
-
 window.addEventListener("load", () => {
 
 });
@@ -60,6 +59,10 @@ const groupTasksTemplate = document.getElementById("group-tasks-template").conte
 const newGroupButton = document.querySelector(".new-group-button");
 
 
+const noteTemplate = document.getElementById("note-template").content;
+const newNoteButton = document.querySelector(".new-note-button");
+
+
 
 // -- Creating New Projects --
 
@@ -100,6 +103,7 @@ function createProject(title){
         id: Date.now().toString(),
         tasks: [],
         groups: [],
+        notes: [],
         oneCompleteTask: false
     }
 }
@@ -129,6 +133,7 @@ function render(){
         header.style.display = "flex";
         renderTasks(selectedProject); 
         renderGroups(selectedProject);
+        renderNotes(selectedProject);
         messageTasksCompleted();
     }
 }
@@ -324,8 +329,6 @@ dueDateIcon.addEventListener("click", function () {
 
 
 
-
-// confirming-adding tasks
 addTaskButton.addEventListener("click", function () {
     const title = newTaskPanelInput.value;
     const dueDate = dueDateInput.value;
@@ -370,6 +373,7 @@ function newGroup(){
 }
 function createGroup(){
     return {
+        title: "title",
         id: Date.now().toString(),
         enabled: false,
         tasks: []
@@ -388,10 +392,12 @@ function createGroupTask(){
 function renderGroups(selectedProject){
     selectedProject.groups.forEach(group => {
         const groupElement = document.importNode(groupTasksTemplate, true);
+        const title = groupElement.querySelector(".group-title");
         const arrow = groupElement.querySelector(".group-tasks-dropdown-arrow");
         const container = groupElement.querySelector(".group-tasks-container");
         const plus = groupElement.querySelector(".group-tasks-dropdown-plus");
         arrow.id = group.id;
+        title.append(group.title);
         groupElement.appendChild(container);
         tasksContainer.appendChild(groupElement);
 
@@ -405,6 +411,9 @@ function renderGroups(selectedProject){
         } else{
             container.style.display = "none";
         }
+
+        
+
 
         arrow.addEventListener("click", e => {
             selectedGroupId = e.target.id;
@@ -437,12 +446,12 @@ function renderGroups(selectedProject){
 
 function renderGroupsTasks(selectedGroup, container){
     clearElement(container);
-    console.log(selectedGroup)
     selectedGroup.tasks.forEach(task => {
         const taskElement = document.importNode(taskTemplate, true);
         const checkbox = taskElement.querySelector(".checkmark");
         checkbox.classList.add("checkbox-group-task");
         const title = taskElement.querySelector(".task-title");
+        title.classList.add("group-title");
         checkbox.id = task.id;
         checkbox.checked = task.complete;  
         const label = taskElement.querySelector("label");
@@ -473,7 +482,6 @@ tasksContainer.addEventListener("click", e => {
             const selectedProject = projects.find(project => project.id === selectedProjectId);
             const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
             const selectedGroupTask = selectedGroup.tasks.find(task => task.id === e.target.id);
-            console.log(selectedGroupTask)
             selectedGroupTask.complete = e.target.checked;
         } else{
             const selectedProject = projects.find(project => project.id === selectedProjectId);
@@ -487,11 +495,12 @@ tasksContainer.addEventListener("click", e => {
     } else if(e.target.classList.contains("task-title")){
         const selectedProject = projects.find(project => project.id === selectedProjectId);
         const selectedTask = selectedProject.tasks.find(task => task.title === e.target.textContent);
-        const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
+        var groupBool = false;
         const li = e.target.parentNode;
         const title = e.target;
         const input = document.createElement("input");
         const form = document.createElement("form");
+        if(li.className === "group-tasks-dropdown") groupBool = true;
         input.classList.add("edit-task-title-input");
         form.appendChild(input);
         input.type = "text";
@@ -503,7 +512,10 @@ tasksContainer.addEventListener("click", e => {
         if(input.value == null && input.value.trim() === "") return
         form.addEventListener("submit", e => {
             e.preventDefault();
-            if(e.target.classList.contains("group-title")){
+            if(groupBool){
+                selectedGroupId = li.querySelector(".group-tasks-dropdown-arrow").id;
+                const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
+                // if title is empty => toggle to placeolder "title"
                 selectedGroup.title = input.value;
             } else{
                 selectedTask.title = input.value;
@@ -572,6 +584,37 @@ $(".checkmark").click(function() {
    alert($(this).attr("class"));
 });
 
+function createNote(){
+    return {
+        title: "default title",
+        id: Date.now().toString()
+    }
+}
+
+
+newNoteButton.addEventListener("click", e => {
+    const selectedProject = projects.find(project => project.id === selectedProjectId); 
+    const note = createNote();
+    selectedProject.notes.push(note);
+    saveAndRender();
+});
+
+function renderNotes(selectedProject){
+    selectedProject.notes.forEach(note => {
+        const noteElement = document.importNode(noteTemplate, true);
+        const arrow = noteElement.querySelector(".group-tasks-dropdown-arrow");
+        const dropdown = noteElement.querySelector(".note-dropdown");
+        tasksContainer.appendChild(noteElement);
+
+        arrow.addEventListener("click", e => {
+            arrow.classList.toggle("arrow-down");
+            dropdown.classList.toggle("hide");
+        });
+    });
+
+
+
+}
 
 
 
