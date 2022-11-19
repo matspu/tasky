@@ -436,7 +436,6 @@ function renderGroups(selectedProject){
             const task = createGroupTask();
             // create a task only here inside of selectedGroup
             const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
-            console.log(selectedGroup);
             selectedGroup.tasks.push(task);
             saveAndRender();
         }); 
@@ -477,6 +476,9 @@ function renderGroupsTasks(selectedGroup, container){
 
 
 tasksContainer.addEventListener("click", e => {
+
+
+    // checking/completing tasks
     if(e.target.tagName.toLowerCase() === "input"){
         if(e.target.classList.contains("checkbox-group-task")){
             const selectedProject = projects.find(project => project.id === selectedProjectId);
@@ -490,18 +492,18 @@ tasksContainer.addEventListener("click", e => {
             if(selectedTask.complete) selectedProject.oneCompleteTask = true;
         }
         saveAndRender(); 
-        //selectedProject.tasks = selectedProject.tasks.filter(task => !task.complete);
-        //setTimeout(saveAndRender, 1500);     // add fade out animation
-    } else if(e.target.classList.contains("task-title")){
+
+        // editing titles (task titles, group titles, group task titles, note titles)
+        // I'M HERE // every title has "editable-title" class, determine whether it's group title => change styling
+        // when submitting get the type of title(task/group), get selectedTask/Group/Note, assing the title then saveAndRender()
+        // make sure to not submit empty title / if group-title
+    } else if(e.target.classList.contains("editable-title")){
         const selectedProject = projects.find(project => project.id === selectedProjectId);
         const selectedTask = selectedProject.tasks.find(task => task.title === e.target.textContent);
-        var groupBool = false;
         const li = e.target.parentNode;
         const title = e.target;
         const input = document.createElement("input");
         const form = document.createElement("form");
-        if(li.className === "group-tasks-dropdown") groupBool = true;
-        input.classList.add("edit-task-title-input");
         form.appendChild(input);
         input.type = "text";
         input.value = title.textContent;
@@ -510,13 +512,27 @@ tasksContainer.addEventListener("click", e => {
         li.removeChild(title);
         input.focus(); 
         if(input.value == null && input.value.trim() === "") return
+        if(e.target.classList.contains("group-title")){
+            input.classList.add("edit-group-title-input");
+            var group = true;
+        } else if(e.target.classList.contains("note-title")){
+            selectedNote = selectedProject.notes.find(note => note.id === e.target.id);
+            input.classList.add("edit-task-title-input");
+            var note = true;
+        } else{
+            input.classList.add("edit-task-title-input");
+            var task = true;
+        }
         form.addEventListener("submit", e => {
             e.preventDefault();
-            if(groupBool){
+            if(group){
                 selectedGroupId = li.querySelector(".group-tasks-dropdown-arrow").id;
                 const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
                 // if title is empty => toggle to placeolder "title"
                 selectedGroup.title = input.value;
+            } else if(note){
+                if(input.value == "") console.log("wrong")
+                selectedNote.title = input.value;
             } else{
                 selectedTask.title = input.value;
             }
@@ -525,6 +541,8 @@ tasksContainer.addEventListener("click", e => {
     } 
 
 });
+
+
 
 
 
@@ -586,7 +604,7 @@ $(".checkmark").click(function() {
 
 function createNote(){
     return {
-        title: "default title",
+        title: "title",
         id: Date.now().toString()
     }
 }
@@ -604,7 +622,11 @@ function renderNotes(selectedProject){
         const noteElement = document.importNode(noteTemplate, true);
         const arrow = noteElement.querySelector(".group-tasks-dropdown-arrow");
         const dropdown = noteElement.querySelector(".note-dropdown");
+        const title = noteElement.querySelector(".note-title");
+        title.id = note.id;
+        title.append(note.title);
         tasksContainer.appendChild(noteElement);
+        
 
         arrow.addEventListener("click", e => {
             arrow.classList.toggle("arrow-down");

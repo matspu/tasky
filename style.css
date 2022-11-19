@@ -599,6 +599,7 @@ body{
 
 
 .group-tasks-dropdown-arrow{
+    color: rgba(255, 255, 255, 0.7);
     transform: rotate(270deg);
     font-size: 14px;
     margin-right: 10px;
@@ -650,6 +651,25 @@ body{
 
 .note-container{
     display: flex;
+    flex-direction: column;
+}
+
+
+.note-title{
+    display: flex;
+    margin: 0;
+    font-size: 16px;
+    color:rgba(255, 255, 255, 0.9);
+}
+
+.edit-group-title-input{
+    display: flex;
+    width: 90%;
+    background-color: transparent;
+    border: none;
+    color:rgba(255, 255, 255, 0.9);
+    padding: 0;
+    font-size: 18px;
 }
 
 
