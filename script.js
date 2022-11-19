@@ -511,7 +511,6 @@ tasksContainer.addEventListener("click", e => {
         li.insertBefore(form, title);
         li.removeChild(title);
         input.focus(); 
-        if(input.value == null && input.value.trim() === "") return
         if(e.target.classList.contains("group-title")){
             input.classList.add("edit-group-title-input");
             var group = true;
@@ -525,17 +524,21 @@ tasksContainer.addEventListener("click", e => {
         }
         form.addEventListener("submit", e => {
             e.preventDefault();
+            if(input.value != null && input.value.trim() === "") return
             if(group){
                 selectedGroupId = li.querySelector(".group-tasks-dropdown-arrow").id;
                 const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
                 // if title is empty => toggle to placeolder "title"
+                if(input.value == null && input.value.trim() === "") return
                 selectedGroup.title = input.value;
             } else if(note){
-                if(input.value == "") console.log("wrong")
+                if(input.value == null && input.value.trim() === "") return
                 selectedNote.title = input.value;
             } else{
+                if(input.value == null && input.value.trim() === "") return
                 selectedTask.title = input.value;
             }
+            
             saveAndRender();
         });
     } 
