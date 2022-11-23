@@ -55,12 +55,16 @@ let blankIcon;
 
 let editingTaskTitle = false;
 
-const groupTasksTemplate = document.getElementById("group-tasks-template").content;
+const groupTemplate = document.getElementById("group-template").content;
 const newGroupButton = document.querySelector(".new-group-button");
+
+const groupTaskTemplate = document.getElementById("group-task-template").content;
+
 
 
 const noteTemplate = document.getElementById("note-template").content;
 const newNoteButton = document.querySelector(".new-note-button");
+
 
 
 
@@ -137,7 +141,6 @@ function render(){
         messageTasksCompleted();
     }
 }
-
 
 
 
@@ -373,7 +376,7 @@ function newGroup(){
 }
 function createGroup(){
     return {
-        title: "title",
+        title: "",
         id: Date.now().toString(),
         enabled: false,
         tasks: []
@@ -382,7 +385,7 @@ function createGroup(){
 
 function createGroupTask(){
     return {
-        title: "default text", 
+        title: "", 
         complete: false,
         id: Date.now().toString()
     }
@@ -391,7 +394,7 @@ function createGroupTask(){
 
 function renderGroups(selectedProject){
     selectedProject.groups.forEach(group => {
-        const groupElement = document.importNode(groupTasksTemplate, true);
+        const groupElement = document.importNode(groupTemplate, true);
         const title = groupElement.querySelector(".group-title");
         const arrow = groupElement.querySelector(".group-tasks-dropdown-arrow");
         const container = groupElement.querySelector(".group-tasks-container");
@@ -400,6 +403,14 @@ function renderGroups(selectedProject){
         title.append(group.title);
         groupElement.appendChild(container);
         tasksContainer.appendChild(groupElement);
+
+
+        if(group.title === ""){
+            title.textContent = "enter title";
+            title.style.color = "rgba(255, 255, 255, 0.418)";  
+        } else{
+            title.classList.toggle("empty");
+        }
 
         if(group.enabled){
             const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
@@ -443,14 +454,18 @@ function renderGroups(selectedProject){
 }
 
 
+
+
+
 function renderGroupsTasks(selectedGroup, container){
     clearElement(container);
     selectedGroup.tasks.forEach(task => {
-        const taskElement = document.importNode(taskTemplate, true);
+        const taskElement = document.importNode(groupTaskTemplate, true);
         const checkbox = taskElement.querySelector(".checkmark");
         checkbox.classList.add("checkbox-group-task");
         const title = taskElement.querySelector(".task-title");
-        title.classList.add("group-title");
+        title.classList.add("group-task-title");
+        title.id = task.id;
         checkbox.id = task.id;
         checkbox.checked = task.complete;  
         const label = taskElement.querySelector("label");
@@ -460,6 +475,13 @@ function renderGroupsTasks(selectedGroup, container){
         if (task.dueDate == null || task.dueDate.trim() === "") taskElement.querySelector(".task-due-date").style.visibility = "hidden";       
         dueDate.append(task.dueDate);
         container.appendChild(taskElement);
+
+        if(task.title === ""){
+            title.textContent = "enter title";
+            title.style.color = "rgba(255, 255, 255, 0.418)";  
+        } else{
+            title.classList.toggle("empty");
+        }
     });
 }
 
@@ -498,6 +520,10 @@ tasksContainer.addEventListener("click", e => {
         // when submitting get the type of title(task/group), get selectedTask/Group/Note, assing the title then saveAndRender()
         // make sure to not submit empty title / if group-title
     } else if(e.target.classList.contains("editable-title")){
+        if(e.target.classList.contains("empty")){
+            e.target.textContent = "";
+            e.target.style.color = "rgba(255, 255, 255, 0.9)";
+        }
         const selectedProject = projects.find(project => project.id === selectedProjectId);
         const selectedTask = selectedProject.tasks.find(task => task.title === e.target.textContent);
         const li = e.target.parentNode;
@@ -518,6 +544,11 @@ tasksContainer.addEventListener("click", e => {
             selectedNote = selectedProject.notes.find(note => note.id === e.target.id);
             input.classList.add("edit-task-title-input");
             var note = true;
+        } else if(e.target.classList.contains("group-task-title")){
+            const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
+            var selectedGroupTask = selectedGroup.tasks.find(task => task.id === e.target.id);
+            input.classList.add("edit-task-title-input");
+            var groupTask = true;
         } else{
             input.classList.add("edit-task-title-input");
             var task = true;
@@ -529,13 +560,12 @@ tasksContainer.addEventListener("click", e => {
                 selectedGroupId = li.querySelector(".group-tasks-dropdown-arrow").id;
                 const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
                 // if title is empty => toggle to placeolder "title"
-                if(input.value == null && input.value.trim() === "") return
                 selectedGroup.title = input.value;
             } else if(note){
-                if(input.value == null && input.value.trim() === "") return
                 selectedNote.title = input.value;
+            } else if(groupTask){
+                selectedGroupTask.title = input.value;
             } else{
-                if(input.value == null && input.value.trim() === "") return
                 selectedTask.title = input.value;
             }
             
@@ -607,7 +637,7 @@ $(".checkmark").click(function() {
 
 function createNote(){
     return {
-        title: "title",
+        title: "",
         id: Date.now().toString()
     }
 }
@@ -629,6 +659,14 @@ function renderNotes(selectedProject){
         title.id = note.id;
         title.append(note.title);
         tasksContainer.appendChild(noteElement);
+
+        if(note.title === ""){
+            title.textContent = "enter title";
+            title.style.color = "rgba(255, 255, 255, 0.418)";  
+        } else{
+            title.classList.toggle("empty");
+        }
+
         
 
         arrow.addEventListener("click", e => {
@@ -640,6 +678,16 @@ function renderNotes(selectedProject){
 
 
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

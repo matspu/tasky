@@ -639,6 +639,10 @@ body{
     padding: 0px 40px;
 
 }
+.title-placeholder{
+    pointer-events: none;
+    opacity: 0.4;
+}
 
 .new-note-button{
     padding: 10px;
@@ -672,6 +676,10 @@ body{
     font-size: 18px;
 }
 
+.editable-title{
+    width: 50%;
+    cursor: text;
+}
 
 
 
