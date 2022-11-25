@@ -244,9 +244,11 @@ newProjectButton.addEventListener("click", function(){
 
 deleteCompleteTasksButton.addEventListener("click", e => {
     const selectedProject = projects.find(project => project.id === selectedProjectId);
-    const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
-    selectedGroup.tasks = selectedGroup.tasks.filter(task => !task.complete);
     selectedProject.tasks = selectedProject.tasks.filter(task => !task.complete);
+    if(selectedProject.groups.length >= 1){
+        const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
+        selectedGroup.tasks = selectedGroup.tasks.filter(task => !task.complete);
+    }
     saveAndRender();
 })
 
@@ -433,9 +435,10 @@ function renderGroups(selectedProject){
         arrow.addEventListener("click", e => {
             selectedGroupId = e.target.id;
             const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
-            const deselectGroup = selectedProject.groups.find(group => group.id !== selectedGroupId);
-            deselectGroup.enabled = false;
-            console.log("selected group", selectedGroup)
+            if(selectedGroup.tasks.length >= 1){
+                const deselectGroup = selectedProject.groups.find(group => group.id !== selectedGroupId);
+                deselectGroup.enabled = false;
+            }
             arrow.classList.toggle("arrow-down");
             plus.classList.toggle("hide");
 
@@ -452,6 +455,10 @@ function renderGroups(selectedProject){
             selectedGroupId = e.target.id;
             const task = createGroupTask()
             const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
+            if(selectedGroup.tasks.length >= 1){
+                const deselectGroup = selectedProject.groups.find(group => group.id !== selectedGroupId);
+                deselectGroup.enabled = false;
+            }
             selectedGroup.tasks.push(task);
             saveAndRender();
         }); 
