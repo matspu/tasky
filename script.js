@@ -244,6 +244,8 @@ newProjectButton.addEventListener("click", function(){
 
 deleteCompleteTasksButton.addEventListener("click", e => {
     const selectedProject = projects.find(project => project.id === selectedProjectId);
+    const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
+    selectedGroup.tasks = selectedGroup.tasks.filter(task => !task.complete);
     selectedProject.tasks = selectedProject.tasks.filter(task => !task.complete);
     saveAndRender();
 })
@@ -400,9 +402,12 @@ function renderGroups(selectedProject){
         const container = groupElement.querySelector(".group-tasks-container");
         const plus = groupElement.querySelector(".group-tasks-dropdown-plus");
         arrow.id = group.id;
+        plus.id = group.id;
         title.append(group.title);
         groupElement.appendChild(container);
         tasksContainer.appendChild(groupElement);
+
+        const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
 
 
         if(group.title === ""){
@@ -413,12 +418,11 @@ function renderGroups(selectedProject){
         }
 
         if(group.enabled){
-            const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
             container.style.display = "block";
             arrow.classList.toggle("arrow-down");
             plus.classList.toggle("hide");
-            // render only one selectedGroup tasks whenever multiple groups are selected
             renderGroupsTasks(selectedGroup, container);
+            // render only one selectedGroup tasks whenever multiple groups are selected
         } else{
             container.style.display = "none";
         }
@@ -429,8 +433,10 @@ function renderGroups(selectedProject){
         arrow.addEventListener("click", e => {
             selectedGroupId = e.target.id;
             const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
+            const deselectGroup = selectedProject.groups.find(group => group.id !== selectedGroupId);
+            deselectGroup.enabled = false;
+            console.log("selected group", selectedGroup)
             arrow.classList.toggle("arrow-down");
-            //container.classList.toggle("hide");
             plus.classList.toggle("hide");
 
             if(container.style.display === "block"){
@@ -440,19 +446,17 @@ function renderGroups(selectedProject){
                 container.style.display = "block";
                 group.enabled = true;
             }
-            renderGroupsTasks(selectedGroup, container);
-            save();
+            saveAndRender();
         });
         plus.addEventListener("click", e => {
-            const task = createGroupTask();
-            // create a task only here inside of selectedGroup
+            selectedGroupId = e.target.id;
+            const task = createGroupTask()
             const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
             selectedGroup.tasks.push(task);
             saveAndRender();
         }); 
     });
 }
-
 
 
 
@@ -487,6 +491,8 @@ function renderGroupsTasks(selectedGroup, container){
 
 
 
+
+
 //  BIG ANNOTATION
 //      when multiple groups are selected => adds task to all selected groups
 //  make sure to have stored in LocalStorage only one selectedGroup
@@ -498,8 +504,6 @@ function renderGroupsTasks(selectedGroup, container){
 
 
 tasksContainer.addEventListener("click", e => {
-
-
     // checking/completing tasks
     if(e.target.tagName.toLowerCase() === "input"){
         if(e.target.classList.contains("checkbox-group-task")){
@@ -547,6 +551,7 @@ tasksContainer.addEventListener("click", e => {
         } else if(e.target.classList.contains("group-task-title")){
             const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
             var selectedGroupTask = selectedGroup.tasks.find(task => task.id === e.target.id);
+            console.log(e.target.id);
             input.classList.add("edit-task-title-input");
             var groupTask = true;
         } else{
