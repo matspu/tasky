@@ -296,6 +296,25 @@ newTaskPanelForm.addEventListener("submit", e => {
 });
 
 
+const dueDateInput = document.querySelector(".task-due-date-details input");
+const dueDateDetails = document.querySelector(".task-due-date-details");
+dueDateDetails.addEventListener("submit", e => {
+    e.preventDefault();
+    const title = newTaskPanelInput.value;
+    const dueDate = dueDateInput.value;
+    if (title == null || title.trim() === "") return
+    const task = createTask(title, dueDate);
+    newTaskPanelInput.value = null;
+    dueDateInput.value = null;
+    const selectedProject = projects.find(project => project.id === selectedProjectId);
+    selectedProject.tasks.push(task);
+    saveAndRender();
+    taskFormAnimationBackwards();
+});
+
+
+
+
 
 
 
@@ -319,8 +338,7 @@ function createTask(title, dueDate){
 
 
 // task due date input
-const dueDateInput = document.querySelector(".task-due-date-details input");
-const dueDateDetails = document.querySelector(".task-due-date-details");
+
 const dueDateIcon = document.querySelector(".task-due-date-details i");
 
 dueDateIcon.addEventListener("click", function () {
@@ -429,16 +447,15 @@ function renderGroups(selectedProject){
             container.style.display = "none";
         }
 
+
         
 
 
         arrow.addEventListener("click", e => {
             selectedGroupId = e.target.id;
-            const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
-            if(selectedGroup.tasks.length >= 1){
-                const deselectGroup = selectedProject.groups.find(group => group.id !== selectedGroupId);
-                deselectGroup.enabled = false;
-            }
+            const selectedProject = projects.find(project => project.id === selectedProjectId);
+            const deselectGroup = selectedProject.groups.filter(group => group.id !== selectedGroupId);
+            deselectGroup.forEach(group => {group.enabled = false;});
             arrow.classList.toggle("arrow-down");
             plus.classList.toggle("hide");
 
@@ -650,9 +667,11 @@ $(".checkmark").click(function() {
 function createNote(){
     return {
         title: "",
+        text: "",
         id: Date.now().toString()
     }
 }
+
 
 
 newNoteButton.addEventListener("click", e => {
@@ -667,6 +686,7 @@ function renderNotes(selectedProject){
         const noteElement = document.importNode(noteTemplate, true);
         const arrow = noteElement.querySelector(".group-tasks-dropdown-arrow");
         const dropdown = noteElement.querySelector(".note-dropdown");
+        const textarea = noteElement.querySelector(".note-dropdown textarea");
         const title = noteElement.querySelector(".note-title");
         title.id = note.id;
         title.append(note.title);
@@ -681,6 +701,10 @@ function renderNotes(selectedProject){
 
         
 
+
+
+        
+
         arrow.addEventListener("click", e => {
             arrow.classList.toggle("arrow-down");
             dropdown.classList.toggle("hide");
@@ -690,6 +714,8 @@ function renderNotes(selectedProject){
 
 
 }
+
+
 
 
 
