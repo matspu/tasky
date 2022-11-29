@@ -277,7 +277,6 @@ newTaskPanelInput.addEventListener("click", function() {
         dueDateInput.style.display = "none";
         dueDateIcon.style.display = "block";
         dueDateDetails.style.display = "flex";
-        
     }
 });
 
@@ -353,7 +352,6 @@ dueDateIcon.addEventListener("click", function () {
 
 
 
-
 addTaskButton.addEventListener("click", function () {
     const title = newTaskPanelInput.value;
     const dueDate = dueDateInput.value;
@@ -408,6 +406,7 @@ function createGroup(){
 function createGroupTask(){
     return {
         title: "", 
+        dueDate: "",
         complete: false,
         id: Date.now().toString()
     }
@@ -448,8 +447,6 @@ function renderGroups(selectedProject){
         }
 
 
-        
-
 
         arrow.addEventListener("click", e => {
             selectedGroupId = e.target.id;
@@ -472,10 +469,6 @@ function renderGroups(selectedProject){
             selectedGroupId = e.target.id;
             const task = createGroupTask()
             const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
-            if(selectedGroup.tasks.length >= 1){
-                const deselectGroup = selectedProject.groups.find(group => group.id !== selectedGroupId);
-                deselectGroup.enabled = false;
-            }
             selectedGroup.tasks.push(task);
             saveAndRender();
         }); 
@@ -499,6 +492,8 @@ function renderGroupsTasks(selectedGroup, container){
         const label = taskElement.querySelector("label");
         label.htmlFor = task.id;
         title.append(task.title);
+        const dueDateDetailsForm = taskElement.querySelector(".task-due-date-details");
+        const dueDateInput = taskElement.querySelector(".task-due-date-details input")
         const dueDate = taskElement.querySelector(".task-due-date-text");  
         if (task.dueDate == null || task.dueDate.trim() === "") taskElement.querySelector(".task-due-date").style.visibility = "hidden";       
         dueDate.append(task.dueDate);
@@ -510,16 +505,22 @@ function renderGroupsTasks(selectedGroup, container){
         } else{
             title.classList.toggle("empty");
         }
+
+        dueDateDetailsForm.addEventListener("submit", e => {
+            e.preventDefault();
+            const dueDate = dueDateInput.value;
+            if (dueDate == null || dueDate.trim() === "") return
+            task.dueDate = dueDate; 
+            saveAndRender();
+        });
+
+        if(task.dueDate !== ""){
+            dueDateDetailsForm.style.display = "none";
+        }
     });
 }
 
 
-
-
-
-//  BIG ANNOTATION
-//      when multiple groups are selected => adds task to all selected groups
-//  make sure to have stored in LocalStorage only one selectedGroup
 
 
 
@@ -528,7 +529,6 @@ function renderGroupsTasks(selectedGroup, container){
 
 
 tasksContainer.addEventListener("click", e => {
-    // checking/completing tasks
     if(e.target.tagName.toLowerCase() === "input"){
         if(e.target.classList.contains("checkbox-group-task")){
             const selectedProject = projects.find(project => project.id === selectedProjectId);
@@ -550,7 +550,7 @@ tasksContainer.addEventListener("click", e => {
     } else if(e.target.classList.contains("editable-title")){
         if(e.target.classList.contains("empty")){
             e.target.textContent = "";
-            e.target.style.color = "rgba(255, 255, 255, 0.9)";
+            e.target.style.color = "rgba(255, 255, 255, 0.418);";
         }
         const selectedProject = projects.find(project => project.id === selectedProjectId);
         const selectedTask = selectedProject.tasks.find(task => task.title === e.target.textContent);
@@ -570,12 +570,11 @@ tasksContainer.addEventListener("click", e => {
             var group = true;
         } else if(e.target.classList.contains("note-title")){
             selectedNote = selectedProject.notes.find(note => note.id === e.target.id);
-            input.classList.add("edit-task-title-input");
+            input.classList.add("edit-group-title-input");
             var note = true;
         } else if(e.target.classList.contains("group-task-title")){
             const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
             var selectedGroupTask = selectedGroup.tasks.find(task => task.id === e.target.id);
-            console.log(e.target.id);
             input.classList.add("edit-task-title-input");
             var groupTask = true;
         } else{
@@ -603,7 +602,6 @@ tasksContainer.addEventListener("click", e => {
     } 
 
 });
-
 
 
 
@@ -688,6 +686,7 @@ function renderNotes(selectedProject){
         const dropdown = noteElement.querySelector(".note-dropdown");
         const textarea = noteElement.querySelector(".note-dropdown textarea");
         const title = noteElement.querySelector(".note-title");
+        textarea.value = note.text;
         title.id = note.id;
         title.append(note.title);
         tasksContainer.appendChild(noteElement);
@@ -700,7 +699,10 @@ function renderNotes(selectedProject){
         }
 
         
-
+        textarea.addEventListener("input", e => {
+            note.text = textarea.value;
+            save();
+        });
 
 
         
@@ -708,35 +710,14 @@ function renderNotes(selectedProject){
         arrow.addEventListener("click", e => {
             arrow.classList.toggle("arrow-down");
             dropdown.classList.toggle("hide");
+            textarea.focus();
         });
     });
-
-
-
 }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 render();
-
-
-
-
-
 
 
 
