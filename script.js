@@ -210,7 +210,7 @@ projectsList.addEventListener("click", e => {
             form.appendChild(input);
             input.type = "text";
             input.value = title.textContent;
-            input.maxLength = "20";
+            input.maxLength = "13";
             input.classList.add("edit-project-input");
             li.insertBefore(form, title);
             li.removeChild(title);
@@ -252,8 +252,11 @@ deleteCompleteTasksButton.addEventListener("click", e => {
     saveAndRender();
 })
 
-// hello and welcome
-
+const newElementButton = document.querySelector(".new-element-button");
+const newElementDropdownContainer = document.querySelector(".new-element-container");
+newElementButton.addEventListener("click", e => {
+    newElementDropdownContainer.classList.toggle("hide");
+})
 
 
 
@@ -559,6 +562,7 @@ tasksContainer.addEventListener("click", e => {
         const input = document.createElement("input");
         const form = document.createElement("form");
         form.appendChild(input);
+        form.style.width = "90%";
         input.type = "text";
         input.value = title.textContent;
         input.maxLength = "60";

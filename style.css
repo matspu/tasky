@@ -22,6 +22,7 @@ body{
 
 
 
+
 /* -- Side Navigation Bar -- */
 
 .side-nav{
@@ -81,7 +82,7 @@ body{
 }
 
 .project:hover .project-tasks-count{
-    opacity: 1;
+    display: block;
 }
 
 .project-title{
@@ -96,7 +97,7 @@ body{
     margin: 0px 8px 0px auto;
     line-height: 30px;
     pointer-events: none;
-    opacity: 0;
+    display: none;
     transition: opacity 0.2s ease;
 }
 
@@ -220,12 +221,12 @@ body{
     border-radius: 10px;
     margin-left: auto;
     margin-right: 5px;
-    color: rgba(255, 255, 255, 0.651);
+    color: rgba(255, 255, 255, 0.8);
     cursor: pointer;
 }
 
 .delete-complete-tasks-button:hover{
-    background-color: rgba(255, 255, 255, 0.164);
+    background-color: #272A30;
 }
 
 /* -- Main Section -- */
@@ -509,17 +510,19 @@ body{
 .edit-project-functions{
     position: absolute;
     background-color: #1D2024;
-    width: 130px;
     margin-top: 10px;
     overflow: auto;
     border-radius: 10px;
     padding: 5px;
     list-style-type: none;
     z-index: 2;
+    border: 1px solid rgba(128, 128, 128, 0.123);
+    overflow: hidden;
 }
   
   .edit-project-functions button{
     display: flex;
+    align-items: center;
     padding: 10px;
     width: 120px;
     margin: 0;
@@ -538,8 +541,9 @@ body{
 
 .edit-project-functions svg{
     color: rgba(255, 255, 255, 0.8);
-    margin-right: 10px;
+    margin-right: 12px;
 }
+
 
 
 .hide{
@@ -547,7 +551,7 @@ body{
 }
 
 .edit-project-input{
-    width: 100px;
+    width: 110px;
     background-color: transparent;
     border: none;
     color: white;
@@ -559,6 +563,7 @@ body{
 .task-panel form{
     width: 90%;
 }
+
 
 .edit-task-title-input{
     display: flex;
@@ -575,19 +580,12 @@ body{
     organise 
 */
 
-.new-group-button{
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.212);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-}
 
 .group-tasks{
     display: flex;
     flex-direction: column;
     padding: 8px 16px 8px;
+    margin-bottom: 10px;
     /*background-color: #272A30;
     border-radius: 1.2rem;
     font-size: 16px;
@@ -626,14 +624,15 @@ body{
 
 .group-tasks-dropdown-plus{
     font-size: 18px;
-    border-radius: 9px;
+    border-radius: 8px;
     margin-left: auto;
     padding: 2px 7px;
     cursor: pointer;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .group-tasks-dropdown-plus:hover{
-    background-color: rgba(128, 128, 128, 0.4);
+    background-color: #272A30;
 }
 
 .group-title{
@@ -654,19 +653,13 @@ body{
     opacity: 0.4;
 }
 
-.new-note-button{
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.116);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-}
+
 
 .note-container{
     display: flex;
     flex-direction: column;
     padding: 8px 16px;
+    margin-bottom: 10px;
 }
 
 .note-container svg{
@@ -708,6 +701,80 @@ body{
 .editable-title{
     width: 90%;
     cursor: text;
+}
+
+.new-element-button{
+    display: flex;
+    align-items: center;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: 5px;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    background-color: #272A30;  
+}
+
+
+.new-element-button i{
+    font-size: 10px;
+    margin-left: 8px;
+    height: 10px;
+}
+
+.new-element-dropdown{
+    position: relative;
+    display: inline-block;
+    border-radius: 10px;
+}
+
+.new-element-container{
+    box-sizing: border-box;
+    position: absolute;
+    background-color: #1D2024;
+    margin-top: 10px;
+    overflow: auto;
+    border-radius: 10px;
+    padding: 5px;
+    list-style-type: none;
+    z-index: 2;
+    border: 1px solid rgba(128, 128, 128, 0.123);
+    overflow: hidden;
+}
+
+.new-element-container button{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    width: 120px;
+    margin: 0;
+    color:rgba(255, 255, 255, 0.8);
+    background-color: transparent;
+    text-align: left;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.new-element-container button:hover{
+    background-color: #272A30;
+}
+
+.new-note-button svg{
+    margin-right: 10px;
+    font-size: 16px;
+    height: 16px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+.new-group-button i{
+    margin-right: 10px;
+    font-size: 16px;
+    height: 16px;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 
