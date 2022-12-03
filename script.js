@@ -6,14 +6,20 @@ window.addEventListener("load", () => {
 window.addEventListener("click", e => {
     
     if(e.target.className !== "edit-project-button"){
-        element = document.querySelector(".edit-project-functions");
+        const element = document.querySelector(".edit-project-functions");
         if(!element.classList.contains("hide")) element.classList.toggle("hide");
     } 
     if(e.target !== newTaskPanelInput && e.target !== dueDateIcon && e.target !== dueDateInput){ 
         newTaskPanelInput.classList.toggle("selected");
         taskFormAnimationBackwards();
     }
+    if(e.target.className !== "new-element-button"){
+        const element = document.querySelector(".new-element-container");
+        if(!element.classList.contains("hide")) element.classList.toggle("hide");
+    }
 });
+
+
 
 
 
@@ -162,7 +168,11 @@ function renderProjects(){
         title.textContent = project.title;
         title.classList.add("project-title");
         const tasksCount = document.createElement("p");
-        const incompleteTaskCount = project.tasks.filter(task => !task.complete).length;
+        var incompleteTaskCount = project.tasks.filter(task => !task.complete).length;
+        project.groups.forEach(group => {
+            incompleteTaskCount += group.tasks.length;
+        });
+        console.log(incompleteTaskCount)
         tasksCount.textContent = incompleteTaskCount;
         tasksCount.classList.add("project-tasks-count");
         edit = document.importNode(editProjectTemplate, true);

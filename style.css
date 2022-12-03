@@ -718,6 +718,7 @@ body{
 
 
 .new-element-button i{
+    pointer-events: none;
     font-size: 10px;
     margin-left: 8px;
     height: 10px;
