@@ -93,14 +93,12 @@ body{
 }
 
 .project-tasks-count{
+    display: none;
     font-size: 15px;
     margin: 0px 8px 0px auto;
     line-height: 30px;
     pointer-events: none;
-    display: none;
-    transition: opacity 0.2s ease;
 }
-
 
 
 .active-project{
@@ -777,6 +775,20 @@ body{
     height: 16px;
     color: rgba(255, 255, 255, 0.8);
 }
+
+.group-task-title-input{
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    height: 29px;
+    background-color: rgba(26, 28, 30, 0.55);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.group-task-title-input::placeholder{
+    color: rgba(255, 255, 255, 0.418);
+}
+
 
 
 

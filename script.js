@@ -169,10 +169,13 @@ function renderProjects(){
         title.classList.add("project-title");
         const tasksCount = document.createElement("p");
         var incompleteTaskCount = project.tasks.filter(task => !task.complete).length;
-        project.groups.forEach(group => {
-            incompleteTaskCount += group.tasks.length;
-        });
-        console.log(incompleteTaskCount)
+        /*
+        if(project.groups.length !== 0){
+            project.groups.forEach(group => {
+                incompleteTaskCount += group.tasks.length;
+            });
+        }
+        */
         tasksCount.textContent = incompleteTaskCount;
         tasksCount.classList.add("project-tasks-count");
         edit = document.importNode(editProjectTemplate, true);
