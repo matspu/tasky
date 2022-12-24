@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+        <script defer src="script.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <title>To Do App</title>
+    </head>
+
+
+    <body>
+
+        <!-- Side Navigation Bar -->
+        <div class="side-nav">
+            <div class="side-nav-header">
+                <h1>tasky</h1><img src="images/tasky. logo.png">
+            </div>
+
+            <div style="display:flex; flex-direction:column; width:220px">
+                <ul class="projects-list"></ul>
+                <div class="new-project-container">
+                    <div style="display:flex; align-items:center; flex-direction:row; margin-bottom:10px;">
+                        <img src="images/pc icon.png" class="new-project-button">
+                        <form>
+                            <input type="text" placeholder="New project" class="new-project-title" maxlength="13">
+                        </form> 
+                    </div>
+                    <div class="icon-select-container hide">
+                        <button id="development-icon" class="icon-select"><img src="images/pc icon.png"></button>
+                        <button id="design-icon" class="icon-select"><img src="images/brush icon.png"></button>
+                        <button id="school-icon" class="icon-select"><img src="images/school icon.png"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <div class="header">
+            <div class="header-container">
+                <img class="header-icon hide" src="">
+                <span class="header-title"></span>
+            </div>
+            <button class="delete-complete-tasks-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" className="w-6 h-6">
+                        <path fillRule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z" clipRule="evenodd" />
+                    </svg>                                           
+            complete</button>
+            <div class="new-element-dropdown">
+                <button class="new-element-button">Create<i class="bi bi-chevron-down"></i></button>
+                <div class="new-element-container hide">
+                    <button class="new-group-button" onclick="newGroup()">
+                        <i class="bi bi-list-check"></i>                                                                     
+                    Group</button>
+                    <button class="new-note-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="18" width="18" fill="rgba(255, 255, 255, 0.8)" className="w-6 h-6">
+                            <path d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0016.5 9h-1.875a1.875 1.875 0 01-1.875-1.875V5.25A3.75 3.75 0 009 1.5H5.625z" />
+                            <path d="M12.971 1.816A5.23 5.23 0 0114.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 013.434 1.279 9.768 9.768 0 00-6.963-6.963z" />
+                        </svg> 
+                    Note</button>
+                </div>
+            </div>
+        </div>
+
+        
+        
+
+        <!-- Main section -->
+        <div class="main-section">
+            <div class="new-task-panel">
+                <form class="new-task-panel-input">
+                    <button class="add-task-button" type="button">+</button>
+                    <input type="text" placeholder="Create a task" maxlength="60">
+                </form>
+                <form class="task-due-date-details">
+                    <i class="bi bi-calendar4-event"></i>
+                    <input type="text" placeholder="Due date" maxlength="10">
+                </form> 
+            </div>
+            <ul class="tasks-container">
+                <div class="message-container">
+                    <img src="" class="message-image">  
+                    <p class="message-text"></p>
+                </div>
+            </ul>
+        </div>
+
+        
+
+        <!-- Templates --> 
+
+        <template id="edit-project-template">
+            <div class="edit-project-dropdown">
+                <button class="edit-project-button"><i class="bi bi-three-dots-vertical"></i></button>
+                <div class="edit-project-functions hide">
+                    <button class="edit-project-title-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" className="w-6 h-6">
+                            <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z" />
+                        </svg> 
+                    Edit</button>
+                    <button class="delete-project-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" className="w-6 h-6">
+                            <path fillRule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z" clipRule="evenodd" />
+                        </svg>                                           
+                    Delete</button>
+                </div>
+            </div>
+        </template>
+
+        <template id="task-template">
+            <li class="task-panel">
+                <label>
+                    <input type="checkbox" class="checkmark">
+                    <span class="checkbox">
+                        <i class="bi bi-check-lg"></i>
+                    </span>
+                </label>
+                <p class="task-title editable-title"></p>
+                <div class="task-due-date">
+                    <p class="task-due-date-text"></p>
+                </div>
+            </li>
+        </template>
+
+        <template id="group-template">
+            <div class="group-tasks">
+                <div class="group-tasks-dropdown">
+                    <span class="group-tasks-dropdown-arrow"><i class="bi bi-chevron-down"></i></span>                
+                    <span class="group-title editable-title empty"></span>
+                    <span class="group-tasks-dropdown-plus hide">+</span>
+                </div>
+                <ul class="group-tasks-container">
+                </ul>
+            </div>
+        </template>
+
+        <template id="group-task-template">
+            <li class="task-panel" style="margin-left:5px;">
+                <label>
+                    <input type="checkbox" class="checkmark">
+                    <span class="checkbox">
+                        <i class="bi bi-check-lg"></i>
+                    </span>
+                </label>
+                <p class="task-title group-task-title editable-title empty"></p>
+                <form class="task-due-date-details" style="display:flex; animation:none; background-color:transparent;">
+                    <input type="text" placeholder="Due date" maxlength="10" style="display:flex;" class="group-task-title-input">
+                </form> 
+                <div class="task-due-date">
+                    <p class="task-due-date-text"></p>
+                </div>
+            </li>
+        </template>
+
+        <template id="note-template">
+            <div class="note-container">
+                <div style="display:flex; flex-direction:row; align-items:center;">
+                    <span class="group-tasks-dropdown-arrow"><i class="bi bi-chevron-down"></i></span> 
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="18" width="18" fill="rgba(255, 255, 255, 0.8)" className="w-6 h-6">
+                        <path d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0016.5 9h-1.875a1.875 1.875 0 01-1.875-1.875V5.25A3.75 3.75 0 009 1.5H5.625z" />
+                        <path d="M12.971 1.816A5.23 5.23 0 0114.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 013.434 1.279 9.768 9.768 0 00-6.963-6.963z" />
+                    </svg>                  
+                    <span class="note-title editable-title empty"></span>  
+                </div>                 
+                <div class="note-dropdown hide">
+                    <textarea></textarea>
+                </div>
+            </div>
+        </template>
+
+
+
+    </body>
+</html>

@@ -1,0 +1,1216 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600;900&display=swap');
+
+* {
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+*:focus{
+    outline: none;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;    
+    color: white;
+    overflow: hidden;
+}
+
+
+
+
+/* -- Side Navigation Bar -- */
+
+.side-nav{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #1A1C20;  
+    padding: 20px;
+}
+
+.side-nav-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.side-nav-header h1{
+    font-size: 35px;
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: bold;
+}
+
+
+
+.projects-list{
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    margin-bottom: 0px;
+    padding-left: 0px;
+    user-select: none;
+}
+
+.project{
+    display: flex;
+    align-items: center;
+    padding: 9px 12px 9px 12px;
+    margin-bottom: 5px;
+    border-radius: 12px;
+    cursor: pointer;
+    user-select: none;
+    font-size: 15px;
+    color:rgba(255, 255, 255, 0.5);
+    background-color: transparent;
+    transition: color 0.2s ease, background-color 0.2s ease;
+
+}
+
+.project:hover{
+    color:rgba(255, 255, 255, 1);
+}
+
+.project:hover .project-tasks-count{
+    display: block;
+}
+
+.project-title{
+    font-size: 15px;
+    margin: 0px;
+    line-height: 30px;
+    pointer-events: none;   
+}
+
+.project-tasks-count{
+    display: none;
+    font-size: 15px;
+    margin: 0px 8px 0px auto;
+    line-height: 30px;
+    pointer-events: none;
+}
+
+
+.active-project{
+    background-color: #272A30;
+    color:rgba(255, 255, 255, 1);
+}
+
+.projects-list img{
+    width: 30px;
+    height: 30px;
+    margin-right: 12px;
+    pointer-events: none;
+}
+
+.new-project-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+}
+
+.new-project-button{
+    display: flex;
+    height: 30px;
+    width: 30px;
+    margin-left: 0px;
+    margin-right: 2px;
+    padding: 0px;
+    border-radius: 10px;
+    font-size: 20px;
+    background-color: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.418);
+    cursor: pointer;
+}
+
+.new-project-button{
+    height: 30px;
+    width: 30px;
+}
+
+
+.new-project-title{
+    visibility: visible; /*change*/
+    width: 135px;
+    border-radius: 10px;
+    color: white;
+    border: none;
+    background-color: transparent;
+    padding: 10px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.new-project-title::placeholder{
+    transition: all 0.2s ease-in-out;
+    opacity: 1;
+    transform: translate(0%);
+    color: rgba(255, 255, 255, 0.418);
+}
+
+.new-project-title:focus::-webkit-input-placeholder {
+    opacity: 0;
+    transform: translate(15%);
+    transition: all 0.2s ease-in-out;
+}
+
+.icon-select-container{
+    display: flex;
+    border-radius: 10px;
+    padding: 10px;
+    border: 2px solid #272a30d7;
+}
+
+.icon-select-container button{
+    border: none;
+    background-color: transparent;
+}
+
+.icon-select-container img{
+    height: 30px;
+    width: 30px;
+}
+.icon-select{
+    cursor: pointer;
+}
+
+
+/* -- Header -- */
+
+.header{
+    display: flex;
+    align-items: center;
+    padding: 70px 20% 70px;
+    background-color: #131517;
+    margin-left: 300px;
+}   
+
+.header-container{
+    display: flex; 
+    align-items: center;
+}
+
+.header-icon{
+    margin-right: 15px;
+    height: 40px;
+    width: 40px;
+    text-indent: 100vw;
+}
+
+.header-title{
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 40px;
+}
+
+.delete-complete-tasks-button{
+    display: flex;
+    border: none;
+    background-color: transparent;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: 5px;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+}
+
+.delete-complete-tasks-button:hover{
+    background-color: #272A30;
+}
+
+/* -- Main Section -- */
+
+.main-section{
+    margin-left: 300px;
+    padding: 0px 20vw 0px;   
+    height: 100vh;
+    overflow-block: hidden;
+    background-color: #131517;   /*111315*/
+}
+
+.tasks-container{
+    height: 100vh;
+    /*padding: 20px;*/
+    padding-left: 0;
+    margin-top: 0px;   
+}
+
+/* -- Task template -- */  
+
+
+.task-panel{
+    display: flex;
+    align-items: center;
+    padding: 6px 16px;
+    height: 41px;
+    /*background-color: #272A30;*/
+    border: 1px solid transparent;
+    border-radius: 0.6rem;
+    font-size: 16px;
+    list-style: none;
+    overflow: hidden;
+    opacity: 1;
+}
+
+.task-panel:hover{
+    background-color:rgba(255, 255, 255, 0.020);
+}
+
+
+.task-panel label{
+    display: flex;
+    align-items: center;
+}
+
+.checkmark{
+    position: absolute;
+    transform: scale(0);
+}
+
+.checkbox{
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    margin-right: 14px;
+    border-radius: 8px;
+    /*background-color: #1a1c1e8c;*/
+    border: 2px solid #272A30;
+    cursor: pointer;
+}
+
+
+
+.checkbox:hover{
+    background-color: #1a1c1ea6;
+}
+
+.checkbox i{
+    display: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 16px;
+    height: 16.5px;
+}
+
+
+
+.checkmark:checked ~ .checkbox{
+    background-color: #272A30;
+}
+
+
+
+.checkmark:checked ~ .checkbox i{ 
+    display: block;
+}
+
+.task-panel label{
+    font-size: 16px;
+    color:rgba(255, 255, 255, 0.9);
+}
+
+.task-title{
+    display: flex;
+    margin: 0;
+    font-size: 16px;
+    width: 90%;
+    color:rgba(255, 255, 255, 0.9);
+}
+
+.task-due-date{
+    display: flex;
+    align-items: center;
+    padding: 6px;
+    background-color: #272A30; 
+    border-radius: 10px;
+    margin-left: auto;
+}
+
+.task-due-date-text{
+    margin: 0;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.815);
+    white-space: nowrap;
+}
+
+/* -- New task input -- */
+
+.new-task-panel{
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #272A30;
+    padding: 8px 12px;
+    border-radius: 14px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    list-style: none;
+    overflow: hidden;
+    transition: opacity 0.1s ease;
+    opacity: 0.5;
+}
+
+.new-task-panel-input{
+    display: flex;
+    align-items: center;
+    height: 30px;
+    width: 90%;
+}
+
+.add-task-button{
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 10px;
+    background-color: #1a1c1e8c;
+    border: none;
+    color: rgba(255, 255, 255, 0.8);    /* change this */
+    font-size: 18px;
+    cursor: pointer;
+    display: none;
+    animation: addTask 0.35s ease;
+}
+
+.add-task-button:hover {
+    background-color: #1a1c1ea6;
+}
+
+@keyframes addTask {
+    0%{left: -40px; opaciy: 0;}
+    100%{left: 0px; opacity: 1;}
+}
+
+@keyframes addTaskBackwards{
+    0%{left: 0px; opaciy: 1;}
+    100%{left: -40px; opacity: 0;}
+}
+
+.new-task-panel input{
+    width: 90%;
+    background-color: #2d2d4400;
+    border: none;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 16px;
+    overflow: hidden;
+}
+
+.new-task-panel input::placeholder{
+    color: rgba(255, 255, 255, 0.418);
+}
+
+.task-due-date-details{
+    align-items: center;
+    border-radius: 10px;
+    background-color: #272A30;
+    margin-left: auto;
+}
+
+.task-due-date-details i{
+    display: none;
+    position: realtive;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    padding: 6px 7px 6px;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.task-due-date-details i:hover{
+    background-color: #1a1c1e8c;
+}
+
+.task-due-date-details input{
+    display: none;
+    width: 0px;
+    font-size: 14px;
+    margin-left: auto;
+    animation: dueDateInput 0.4s ease;
+    animation-fill-mode: forwards;
+}
+
+.task-due-date-details input::placeholder{
+    color: rgba(255, 255, 255, 0.418);
+}
+
+@keyframes dueDateInput {
+    0%{width: 0px;}
+    100%{width: 80px;}    
+}
+
+
+.message-container{    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 52%;
+    top: 50%;
+}
+
+.message-image{
+    height: 64px;
+    width: 64px;
+    margin-bottom: 20px;
+    text-indent: 100vw;
+}
+
+.message-text{
+    color: white;
+}
+
+
+
+
+
+
+.edit-project-dropdown{
+    position: relative;
+    display: inline-block;
+    border-radius: 10px;
+    margin-left: auto;
+}
+
+.edit-project-button{
+    background: none;
+    color:white;
+    padding: 5px 6px 5px 6px;
+    border-radius: 7px;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+}
+
+.edit-project-button:focus{
+    background-color: rgba(128, 128, 128, 0.411);
+}
+
+.edit-project-button i{
+    pointer-events: none;
+}
+
+.edit-project-button:hover{
+    background-color: rgba(128, 128, 128, 0.411);
+}
+  
+.edit-project-functions{
+    position: absolute;
+    background-color: #1D2024;
+    margin-top: 10px;
+    overflow: auto;
+    border-radius: 10px;
+    padding: 5px;
+    list-style-type: none;
+    z-index: 2;
+    border: 1px solid rgba(128, 128, 128, 0.123);
+    overflow: hidden;
+    animation: dropdown 0.1s ease;
+}
+  
+  .edit-project-functions button{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    width: 120px;
+    margin: 0;
+    color:rgba(255, 255, 255, 0.8);
+    background-color: #1D2024;
+    text-align: left;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+  
+.edit-project-functions button:hover{
+     background-color: #272A30;
+}
+
+.edit-project-functions svg{
+    color: rgba(255, 255, 255, 0.8);
+    margin-right: 12px;
+}
+
+
+
+.hide{
+    display: none;
+}
+
+.edit-project-input{
+    width: 110px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    padding: 0;
+    font-size: 15px;
+    line-height: 30px;
+}
+
+.task-panel form{
+    width: 90%;
+}
+
+
+.edit-task-title-input{
+    display: flex;
+    width: 90%;
+    background-color: transparent;
+    border: none;
+    color:rgba(255, 255, 255, 0.9);
+    padding: 0;
+    font-size: 16px;
+}
+
+
+/*
+    organise 
+*/
+
+
+.group-tasks{
+    display: flex;
+    flex-direction: column;
+    padding: 8px 16px 8px;
+    /*background-color: #272A30;
+    border-radius: 1.2rem;
+    font-size: 16px;
+    margin-bottom: 10px;
+    list-style: none;
+    overflow: hidden;
+    opacity: 1;
+    */
+}
+
+.group-tasks-dropdown{
+    display: flex;
+    align-content: center;
+}
+
+
+.group-tasks-dropdown-arrow{
+    transform: rotate(270deg);
+    color: rgba(255, 255, 255, 0.479);
+    margin-right: 14px;
+    cursor: pointer;
+}
+
+.group-tasks-dropdown-arrow i{
+    pointer-events: none;
+    font-size: 14px;
+    -webkit-text-stroke: 0.3px rgba(255, 255, 255, 0.479);
+}
+
+
+.arrow-down{
+    margin-top: 3px;
+    transform: rotate(0deg);
+}
+
+
+
+.group-tasks-dropdown-plus{
+    font-size: 18px;
+    border-radius: 8px;
+    margin-left: auto;
+    padding: 2px 7px;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.group-tasks-dropdown-plus:hover{
+    background-color: #272A30;
+}
+
+.group-title{
+    display: flex;
+    align-items: center;
+    margin: 0;
+    font-size: 18px;
+    font-weight: bolder;
+    height: 22px;
+    color:rgba(255, 255, 255, 0.9);
+}
+
+.group-tasks-container{
+    display: none;
+    padding: 0px 0px;
+    border-left: 2px solid #272A30;
+    margin-left: 23px;
+}
+.title-placeholder{
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+
+
+.note-container{
+    display: flex;
+    flex-direction: column;
+    padding: 8px 16px;
+    margin-bottom: 10px;
+}
+
+.note-container svg{
+    margin-right: 5px;  
+}
+
+
+.note-title{
+    display: flex;
+    margin: 0;
+    font-size: 18px;
+    color:rgba(255, 255, 255, 0.9);
+}
+
+
+.note-dropdown textarea{
+    background-color: #272A30;
+    color:rgba(255, 255, 255, 0.9);
+    height: 200px;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px;
+    resize: none;
+    font-size: 16px;
+}
+
+.edit-group-title-input{
+    display: flex;
+    width: 90%;
+    background-color: transparent;
+    border: none;
+    color:rgba(255, 255, 255, 0.9);
+    padding: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+.editable-title{
+    width: 90%;
+    cursor: text;
+}
+
+.new-element-button{
+    display: flex;
+    align-items: center;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: 5px;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    background-color: #272A30;  
+}
+
+
+.new-element-button i{
+    pointer-events: none;
+    font-size: 11px;
+    margin-left: 8px;
+    height: 11px;
+}
+
+.new-element-dropdown{
+    position: relative;
+    display: inline-block;
+    border-radius: 10px;
+}
+
+.new-element-container{
+    box-sizing: border-box;
+    position: absolute;
+    margin-top: 10px;
+    background-color: #1D2024;
+    overflow: auto;
+    border-radius: 10px;
+    padding: 5px;
+    list-style-type: none;
+    z-index: 2;
+    border: 1px solid rgba(128, 128, 128, 0.123);
+    overflow: hidden;
+    animation: dropdown 0.08s ease;
+}
+
+@keyframes dropdown {
+    0%{margin-top: 0px;}
+    100%{margin-top: 10px; opacity: 1;}
+}
+
+.new-element-container button{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    width: 120px;
+    margin: 0;
+    color:rgba(255, 255, 255, 0.8);
+    background-color: transparent;
+    text-align: left;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.new-element-container button:hover{
+    background-color: #272A30;
+}
+
+.new-note-button svg{
+    margin-right: 10px;
+    font-size: 16px;
+    height: 16px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+.new-group-button i{
+    margin-right: 10px;
+    font-size: 16px;
+    height: 16px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.group-task-title-input{
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    height: 29px;
+    background-color: #272A30;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.group-task-title-input::placeholder{
+    color: rgba(255, 255, 255, 0.418);
+}
+
+
+
+
+
+
+
+
+
+/*
+
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600;900&display=swap');
+
+* {
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+*:focus{
+    outline: none;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    color: white;
+    overflow: hidden;
+}
+*/
+
+/* -- Side Navigation Bar --*/
+/*
+.side-nav{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #2D2D44;      
+    overflow-x: hidden;
+    padding: 20px;
+}
+
+
+
+.side-nav-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.side-nav-header h1{
+    font-size: 35px;
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: bold;
+}
+
+
+
+.projects-list{
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    margin-bottom: 0px;
+    padding-left: 0px;
+    user-select: none;
+}
+
+.project{
+    display: flex;
+    align-items: center;
+    padding: 10px 15px 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+    font-size: 14px;
+}
+
+.active-project{
+    background-color: #1f1f303b;
+}
+
+.projects-list img{
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+    pointer-events: none;
+}
+
+.new-project-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+}
+
+.new-project-button{
+    height: 35px;
+    width: 35px;
+    margin-left: 0px;
+    border-radius: 10px;
+    font-size: 20px;
+    background-color: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.418);
+    cursor: pointer;
+}
+
+.new-project-button:hover{
+    background-color: #1E1E2C;
+}
+
+*/
+/*
+
+.new-project-title{
+    visibility: visible; //change
+    width: 135px;
+    border-radius: 10px;
+    color: white;
+    border: none;
+    background-color: #2D2D44;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.new-project-title::placeholder{
+    color: rgba(255, 255, 255, 0.418);
+}
+
+.icon-select-container{
+    display: flex;
+    visibility: hidden;
+    border-radius: 10px;
+    padding: 10px;
+    border: 2px solid #36364b;
+    
+}
+
+.icon-select-container button{
+    border: none;
+    background-color: transparent;
+}
+
+.icon-select-container img{
+    height: 35px;
+    width: 35px;
+}
+
+.icon-select{
+    cursor: pointer;
+
+}
+*/
+
+
+/* -- Header -- */
+/*
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 70px 300px 70px;
+    background-color: #1E1E2C;
+    margin-left: 300px;
+}   
+
+.header-icon{
+    margin-right: 15px;
+    height: 40px;
+    width: 40px;
+}
+
+.header-title{
+    font-size: 28px;
+}
+
+*/
+/* -- Main Section -- */
+/*
+.main-section{
+    margin-left: 300px;
+    padding: 0px 300px 0px;
+    height: 100vh;
+    overflow-block: hidden;
+    background-color: #1E1E2C;
+}
+
+.tasks-container{
+    height: 100vh;
+    padding: 20px;
+    margin-top: 0px;
+}
+
+.task-panel{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px 12px;
+    background-color: #2D2D44;
+    border-radius: 1.2rem;
+    font-size: 16px;
+    margin-bottom: 10px;
+    list-style: none;
+    overflow: hidden;
+    opacity: 1;
+    animation: 0.2s addTaskPanel ease-in;
+}
+
+@keyframes addTaskPanel {
+    0%{opacity: 0;}
+    100%{opacity: 1;}
+}
+
+
+#task{
+    display: none;
+}
+
+.task-panel label{
+    display: flex;
+    align-items: center;
+}
+
+.task-panel input{
+    position: absolute;
+    transform: scale(0);
+}
+
+.new-task-panel{
+    display: flex;
+    justify-content: space-between;
+    background-color: #2D2D44;
+    padding: 12px 16px 12px;
+    border-radius: 1.2rem;
+    font-size: 16px;
+    margin-bottom: 15px;
+    list-style: none;
+    
+    transition: opacity 0.1s ease;
+    opacity: 0.5;
+}
+
+.new-task-panel-input{
+    display: flex;
+    align-items: center;
+    height: 30px;
+}
+
+.add-task-button{
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 10px;
+    background-color: #1e1e2c79;
+    border: none;
+    color: rgba(255, 255, 255, 0.8);    //change this
+    font-size: 18px;
+    cursor: pointer;
+    display: none;
+    animation: addTask 0.3s ease;
+}
+
+.add-task-button:hover {
+    background-color: #1e1e2c67;
+}
+
+@keyframes addTask {
+    0%{left: -30px; opaciy: 0;}
+    100%{left: 0px; opacity: 1;}
+}
+
+.new-task-panel input{
+    width: 30em;
+    background-color: #2d2d4400;
+    border: none;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 16px;
+    overflow: hidden;
+}
+
+.new-task-panel input::placeholder{
+    color: rgba(255, 255, 255, 0.418);
+}
+
+
+
+.   box{
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    margin-right: 14px;
+    border-radius: 10px;
+    background-color: #1e1e2c79;
+    cursor: pointer;
+}
+
+.checkbox:hover{
+    background-color: #1e1e2c67;
+}
+
+.checkbox i{
+    display: none;
+    transform: scale(0);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 18px;
+    margin-top: 2px;
+    animation: checkbox 0.4s linear forwards;
+}
+
+@keyframes checkbox{
+    50% {transform: scale(1.4);}
+    75% {transform: scale(1.1);}
+    100% {transform: scale(1);}
+}
+
+.task-panel input:checked ~ .checkbox{
+    background-color: #1e1e2c79;
+}
+
+.task-panel input:checked ~ .checkbox i{ 
+    display: block;
+}
+
+
+
+
+
+
+
+.task-title {
+    margin: 0;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.task-due-date{
+    display: flex;
+    align-items: center;
+    padding: 6px;
+    background-color: #1e1e2c79;
+    border-radius: 10px;
+    margin-left: 5px;
+
+}
+
+.task-due-date i{
+    font-size: 16px;
+}
+
+.task-due-date-text{
+    margin: 0;
+    font-size: 14px;
+    
+}
+
+
+.task-due-date-details{
+    align-items: center;
+    border-radius: 10px;
+
+}
+
+.task-due-date-details i{
+    display: none;
+    position: realtive;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    padding: 6px 7px 6px;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.task-due-date-details i:hover{
+    background-color: #1e1e2c79;
+}
+
+.task-due-date-details input{
+    display: none;
+    width: 0px;
+    font-size: 14px;
+    animation: dueDateInput 0.4s ease;
+    animation-fill-mode: forwards;
+}
+
+.task-due-date-details input::placeholder{
+    color: rgba(255, 255, 255, 0.418);
+}
+
+@keyframes dueDateInput {
+    0%{width: 0px;}
+    100%{width: 80px;}    
+}
+
+
+
+*/
+
+
+
+
+
