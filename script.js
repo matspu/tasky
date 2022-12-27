@@ -90,7 +90,9 @@ $(".icon-select").click(function(){
     iconSource = $(this).find("img").attr("src");
     iconSource.toString();
     document.querySelector(".icon-select-container").classList.toggle("hide");    
-    newProjectButton.src = iconSource;
+    newProjectInput.focus();
+    newProjectButton.querySelector("img").src = iconSource;
+    document.querySelector(".new-project-button img").style.display = "block";
 });
 
 
@@ -103,7 +105,9 @@ newProjectForm.addEventListener("submit", e => {
     newProjectInput.value = null;
     projects.push(project);
     newProjectInput.blur(); 
-    saveAndRender(); 
+    saveAndRender();
+    newProjectButton.style.backgroundColor = "transparent";
+    document.querySelector(".new-project-button img").src = "";
 });
 
 
@@ -245,9 +249,17 @@ function clearElement(element){
 
 
 newProjectButton.addEventListener("click", function(){
-    console.log("click")
     const iconSelectContainer = document.querySelector(".icon-select-container");
     iconSelectContainer.classList.toggle("hide");
+});
+
+const newProjectLabel = document.querySelector(".new-project-label");
+const newProjectButtonIcon = document.querySelector(".new-project-button i");
+newProjectLabel.addEventListener("click", e => {
+    //newProjectButtonIcon.classList = "bi bi-calendar";
+    newProjectButton.style.backgroundColor = "rgba(128, 128, 128, 0.322)";
+    newProjectButton.style.fontSize = "14px";
+    newProjectButton.style.pointerEvents = "auto";
 });
 
 

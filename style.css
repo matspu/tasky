@@ -117,27 +117,57 @@ body{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 10px;
+    padding: 9px 12px;
 }
+
+.new-project-label{
+    
+    display: flex; 
+    align-items: center; 
+    flex-direction: row; 
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.new-project-label:hover .new-project-button{
+    background-color: rgba(128, 128, 128, 0.322);
+}
+
+.new-project-label:hover .new-project-title::placeholder{
+    color:rgba(255, 255, 255, 1);
+}
+
 
 .new-project-button{
     display: flex;
+    align-items: center;
+    justify-content: center;
     height: 30px;
     width: 30px;
     margin-left: 0px;
     margin-right: 2px;
     padding: 0px;
     border-radius: 10px;
-    font-size: 20px;
-    background-color: transparent;
     border: none;
+    background-color: transparent;
     color: rgba(255, 255, 255, 0.418);
     cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.15s ease-in-out;
+    pointer-events: none;
 }
 
-.new-project-button{
+.new-project-button:hover{
+    background-color: rgba(128, 128, 128, 0.322);
+}
+
+.new-project-button img{
+    display: block;
+    position: absolute;
+    z-index: 1;
     height: 30px;
     width: 30px;
+    text-indent: 100vw;
 }
 
 
@@ -154,11 +184,13 @@ body{
 }
 
 .new-project-title::placeholder{
-    transition: all 0.2s ease-in-out;
+    transition: all 0.15s ease;
     opacity: 1;
     transform: translate(0%);
     color: rgba(255, 255, 255, 0.418);
 }
+
+    
 
 .new-project-title:focus::-webkit-input-placeholder {
     opacity: 0;
@@ -225,6 +257,7 @@ body{
     margin-right: 5px;
     color: rgba(255, 255, 255, 0.8);
     cursor: pointer;
+    transition: background-color 0.15s ease;
 }
 
 .delete-complete-tasks-button:hover{
