@@ -3,20 +3,31 @@ window.addEventListener("load", () => {
 
 });
 
+
 window.addEventListener("click", e => {
     
-    if(e.target.className !== "edit-project-button"){
-        const element = document.querySelector(".edit-project-functions");
-        if(!element.classList.contains("hide")) element.classList.toggle("hide");
-    } 
     if(e.target !== newTaskPanelInput && e.target !== dueDateIcon && e.target !== dueDateInput){ 
         newTaskPanelInput.classList.toggle("selected");
         taskFormAnimationBackwards();
     }
     if(e.target.className !== "new-element-button"){
         const element = document.querySelector(".new-element-container");
-        if(!element.classList.contains("hide")) element.classList.toggle("hide");
+        if(!element.classList.contains("dropdown-exit")) element.classList.replace("dropdown-active", "dropdown-exit");
     }
+
+    if(e.target.className !== "edit-project-button"){
+        const element = document.querySelector(".edit-project-functions");
+        if(!element.classList.contains("dropdown-exit")) element.classList.replace("dropdown-active", "dropdown-exit");
+    }
+
+    if(e.target.className !== "task-title"){
+
+    }
+    /*
+    if(e.target.className !== "icon-select-container"){
+        const element = document.querySelector(".icon-select-container");
+        if(!element.classList.contains("hide")) element.classList.toggle()
+    }*/
 });
 
 
@@ -206,7 +217,8 @@ projectsList.addEventListener("click", e => {
         const ul = projectsList;
 
         if(button.className === "edit-project-button"){
-            button.parentNode.getElementsByClassName("edit-project-functions")[0].classList.toggle("hide"); 
+            button.parentNode.getElementsByClassName("edit-project-functions")[0].classList.toggle("dropdown-active"); 
+            button.parentNode.getElementsByClassName("edit-project-functions")[0].classList.toggle("dropdown-exit"); 
         }
 
         if(button.textContent.includes("Delete")){
@@ -276,7 +288,9 @@ deleteCompleteTasksButton.addEventListener("click", e => {
 const newElementButton = document.querySelector(".new-element-button");
 const newElementDropdownContainer = document.querySelector(".new-element-container");
 newElementButton.addEventListener("click", e => {
-    newElementDropdownContainer.classList.toggle("hide");
+    newElementDropdownContainer.classList.toggle("dropdown-active");
+    newElementDropdownContainer.classList.toggle("dropdown-exit");
+    
 })
 
 
@@ -437,20 +451,24 @@ function createGroupTask(){
 }
 
 
+
 function renderGroups(selectedProject){
     if(selectedProject.groups.length >= 1){
-        console.log("true");
         selectedProject.groups.forEach(group => {
             const groupElement = document.importNode(groupTemplate, true);
             const title = groupElement.querySelector(".group-title");
             const arrow = groupElement.querySelector(".group-tasks-dropdown-arrow");
             const container = groupElement.querySelector(".group-tasks-container");
+            const editButton = groupElement.querySelector(".edit-group-button");
+            const editFunctions = groupElement.querySelector(".edit-group-functions");
             const plus = groupElement.querySelector(".group-tasks-dropdown-plus");
             arrow.id = group.id;
+            editButton.id = group.id;
             plus.id = group.id;
             title.append(group.title);
             groupElement.appendChild(container);
             tasksContainer.appendChild(groupElement);
+            container.style.maxHeight = "200px";
     
             const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
     
@@ -464,8 +482,9 @@ function renderGroups(selectedProject){
     
             if(group.enabled){
                 container.style.display = "block";
-                arrow.classList.toggle("arrow-down");
+                editButton.style.display = "none";
                 plus.classList.toggle("hide");
+                arrow.classList.toggle("arrow-down");
                 renderGroupsTasks(selectedGroup, container);
                 // render only one selectedGroup tasks whenever multiple groups are selected
             } else{
@@ -479,8 +498,10 @@ function renderGroups(selectedProject){
                 const selectedProject = projects.find(project => project.id === selectedProjectId);
                 const deselectGroup = selectedProject.groups.filter(group => group.id !== selectedGroupId);
                 deselectGroup.forEach(group => {group.enabled = false;});
-                arrow.classList.toggle("arrow-down");
                 plus.classList.toggle("hide");
+
+                arrow.classList.toggle("arrow-down");
+
     
                 if(container.style.display === "block"){
                     container.style.display = "none";
@@ -489,7 +510,30 @@ function renderGroups(selectedProject){
                     container.style.display = "block";
                     group.enabled = true;
                 }
-                saveAndRender();
+                
+                save();
+                renderGroupsTasks(selectedGroup, container);
+                
+            });
+
+
+            
+
+            editButton.addEventListener("click", e => {
+                editFunctions.classList.toggle("dropdown-active");
+                editFunctions.classList.toggle("dropdown-exit");
+            });
+
+            editFunctions.addEventListener("click", e => {
+                if(e.target.tagName.toLowerCase() === "button"){
+                    const button = e.target;
+                    if(button.textContent.includes("Delete")){
+                        selectedProject.groups = selectedProject.groups.filter(group => group.id !== selectedGroupId);
+                        selectedGroupId = null;
+                        saveAndRender();
+                        location.reload();
+                    }
+                }
             });
             plus.addEventListener("click", e => {
                 selectedGroupId = e.target.id;
@@ -592,7 +636,8 @@ tasksContainer.addEventListener("click", e => {
         input.value = title.textContent;
         input.maxLength = "60";
         li.insertBefore(form, title);
-        li.removeChild(title);
+        //li.removeChild(title);
+        title.style.display = "none";
         input.focus(); 
         if(e.target.classList.contains("group-title")){
             input.classList.add("edit-group-title-input");
@@ -605,11 +650,12 @@ tasksContainer.addEventListener("click", e => {
             const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
             var selectedGroupTask = selectedGroup.tasks.find(task => task.id === e.target.id);
             input.classList.add("edit-task-title-input");
-            input.closest(".task-panel").style.border = "1px solid rgba(71, 71, 71, 0.308)";
+            input.closest(".task-panel").style.backgroundColor = "rgba(255, 255, 255, 0.020)";
             var groupTask = true;
         } else{
             input.classList.add("edit-task-title-input");
-            input.closest(".task-panel").style.border = "1px solid rgba(71, 71, 71, 0.308)";
+            input.closest(".task-panel").style.backgroundColor = "rgba(255, 255, 255, 0.020)";
+            input.closest(".task-panel").classList.add("editing");
             var task = true;
         }
         form.addEventListener("submit", e => {
@@ -715,10 +761,10 @@ newNoteButton.addEventListener("click", e => {
 function renderNotes(selectedProject){
     selectedProject.notes.forEach(note => {
         const noteElement = document.importNode(noteTemplate, true);
-        const arrow = noteElement.querySelector(".group-tasks-dropdown-arrow");
         const dropdown = noteElement.querySelector(".note-dropdown");
         const textarea = noteElement.querySelector(".note-dropdown textarea");
         const title = noteElement.querySelector(".note-title");
+        const icon = noteElement.querySelector(".note-icon");
         textarea.value = note.text;
         title.id = note.id;
         title.append(note.title);
@@ -740,8 +786,7 @@ function renderNotes(selectedProject){
 
         
 
-        arrow.addEventListener("click", e => {
-            arrow.classList.toggle("arrow-down");
+        icon.addEventListener("click", e => {
             dropdown.classList.toggle("hide");
             textarea.focus();
         });
