@@ -47,10 +47,15 @@ body{
     align-items: center;
 }
 
-.side-nav-header h1{
-    font-size: 35px;
+.side-nav-header p{
+    font-size: 25px;
     font-family: "Source Sans Pro", sans-serif;
-    font-weight: bold;
+    font-weight: 500;
+}
+
+.side-nav-header img{
+    height: 30px;
+    margin-right: 5px;
 }
 
 
@@ -295,6 +300,7 @@ body{
     list-style: none;
     overflow: hidden;
     opacity: 1;
+    transition: background-color 0.2s ease;
 }
 
 .task-panel:hover{
@@ -618,6 +624,7 @@ body{
     flex-direction: column;
     padding: 8px 16px 8px;
     border-radius: 0.6rem;
+    transition: background-color 0.2s ease;
 }
 
 
