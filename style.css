@@ -43,22 +43,24 @@ body{
 
 .side-nav-header{
     display: flex;
-    justify-content: center;
+    width: 100%;
     align-items: center;
+    margin-left: 10px;
 }
 
 .side-nav-header p{
-    font-size: 25px;
-    font-family: "Source Sans Pro", sans-serif;
+    font-size: 24px;
     font-weight: 500;
-    margin: 0px 0px;
+    margin: 0px;
 }
 
 .side-nav-header img{
-    height: 80px;
-    width: 80px;
+    height: 70px;
+    width: 70px;
+    margin-right: 2px;
     -webkit-user-drag: none;
     user-select: none;
+
 }
 
 
