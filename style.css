@@ -51,11 +51,14 @@ body{
     font-size: 25px;
     font-family: "Source Sans Pro", sans-serif;
     font-weight: 500;
+    margin: 0px 0px;
 }
 
 .side-nav-header img{
-    height: 30px;
-    margin-right: 5px;
+    height: 80px;
+    width: 80px;
+    -webkit-user-drag: none;
+    user-select: none;
 }
 
 
