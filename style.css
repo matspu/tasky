@@ -24,7 +24,6 @@ body{
 
 
 
-
 /* -- Side Navigation Bar -- */
 
 .side-nav{
@@ -248,6 +247,7 @@ body{
     height: 40px;
     width: 40px;
     text-indent: 100vw;
+    -webkit-user-drag: none;
 }
 
 .header-title{
