@@ -99,7 +99,7 @@ body{
 .project-title{
     font-size: 15px;
     margin: 0px;
-    line-height: 30px;
+    line-height: 30px; 
     pointer-events: none;   
 }
 
@@ -118,8 +118,8 @@ body{
 }
 
 .projects-list img{
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     margin-right: 12px;
     pointer-events: none;
 }
@@ -403,7 +403,7 @@ body{
     margin-bottom: 15px;
     list-style: none;
     overflow: hidden;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.4s ease;
     opacity: 0.5;
 }
 
