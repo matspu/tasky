@@ -86,8 +86,6 @@ const newNoteButton = document.querySelector(".new-note-button");
 
 
 // -- Creating New Projects --
-
-
 const newProjectInput = document.querySelector(".new-project-title");
 const newProjectForm = document.querySelector(".new-project-container form");
 const newProjectButton = document.querySelector(".new-project-button");
@@ -100,7 +98,9 @@ let selectedGroupId = localStorage.getItem(LOCAL_STORAGE_SELECTED_GROUP_ID_KEY);
 $(".icon-select").click(function(){
     iconSource = $(this).find("img").attr("src");
     iconSource.toString();
-    document.querySelector(".icon-select-container").classList.toggle("hide");    
+    document.querySelector(".icon-select-container").classList.toggle("hide");  
+    newProjectButton.style.backgroundColor = "transparent";
+    document.querySelector(".new-project-button i").style.color = "transparent";
     newProjectInput.focus();
     newProjectButton.querySelector("img").src = iconSource;
     document.querySelector(".new-project-button img").style.display = "block";
@@ -119,6 +119,8 @@ newProjectForm.addEventListener("submit", e => {
     saveAndRender();
     newProjectButton.style.backgroundColor = "transparent";
     document.querySelector(".new-project-button img").src = "";
+    document.querySelector(".new-project-button i").style.color = "rgba(255, 255, 255, 0.418)";
+
 });
 
 
@@ -270,7 +272,7 @@ const newProjectButtonIcon = document.querySelector(".new-project-button i");
 newProjectLabel.addEventListener("click", e => {
     //newProjectButtonIcon.classList = "bi bi-calendar";
     newProjectButton.style.backgroundColor = "rgba(128, 128, 128, 0.322)";
-    newProjectButton.style.fontSize = "14px";
+    newProjectButton.style.fontSize = "16px";
     newProjectButton.style.pointerEvents = "auto";
 });
 
