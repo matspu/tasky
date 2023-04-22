@@ -264,7 +264,8 @@ function clearElement(element){
 
 newProjectButton.addEventListener("click", function(){
     const iconSelectContainer = document.querySelector(".icon-select-container");
-    iconSelectContainer.classList.toggle("hide");
+    iconSelectContainer.classList.toggle("dropdown-active");
+    iconSelectContainer.classList.toggle("dropdown-exit");
 });
 
 const newProjectLabel = document.querySelector(".new-project-label");
