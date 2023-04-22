@@ -640,7 +640,7 @@ tasksContainer.addEventListener("click", e => {
         form.style.width = "90%";
         input.type = "text";
         input.value = title.textContent;
-        input.maxLength = "60";
+        input.maxLength = "70";
         li.insertBefore(form, title);
         //li.removeChild(title);
         title.style.display = "none";
