@@ -19,10 +19,14 @@ window.addEventListener("click", e => {
         const element = document.querySelector(".edit-project-functions");
         if(!element.classList.contains("dropdown-exit")) element.classList.replace("dropdown-active", "dropdown-exit");
     }
-
-    if(e.target.className !== "task-title"){
-
+    
+    if (e.target.className !== "new-project-button") {
+        const element = document.querySelector(".icon-select-container");
+        if(!element.classList.contains("dropdown-exit")) element.classList.replace("dropdown-active", "dropdown-exit");
     }
+
+
+    
     /*
     if(e.target.className !== "icon-select-container"){
         const element = document.querySelector(".icon-select-container");
@@ -98,7 +102,6 @@ let selectedGroupId = localStorage.getItem(LOCAL_STORAGE_SELECTED_GROUP_ID_KEY);
 $(".icon-select").click(function(){
     iconSource = $(this).find("img").attr("src");
     iconSource.toString();
-    document.querySelector(".icon-select-container").classList.toggle("hide");  
     newProjectButton.style.backgroundColor = "transparent";
     document.querySelector(".new-project-button i").style.color = "transparent";
     newProjectInput.focus();

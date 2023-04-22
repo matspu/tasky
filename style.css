@@ -82,7 +82,7 @@ body{
     cursor: pointer;
     user-select: none;
     font-size: 15px;
-    opacity: 0.5;
+    opacity: 0.6;
     background-color: transparent;
     transition: opacity 0.2s ease, background-color 0.2s ease;
 
@@ -177,6 +177,11 @@ body{
     height: 30px;
     width: 30px;
     text-indent: 100vw;
+    pointer-events: none;
+}
+
+.new-project-button i{
+    pointer-events: none;
 }
 
 
