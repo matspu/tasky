@@ -25,6 +25,13 @@ window.addEventListener("click", e => {
         if(!element.classList.contains("dropdown-exit")) element.classList.replace("dropdown-active", "dropdown-exit");
     }
 
+    if (e.target.className != "edit-task-title-input") {
+        console.log("true");
+        const element = document.querySelector(".task-panel");
+        if (!element.classList.contains("editing")) element.classList.toggle("editing");
+    }
+
+
 
     
     /*
@@ -537,7 +544,6 @@ function renderGroups(selectedProject){
                         selectedProject.groups = selectedProject.groups.filter(group => group.id !== selectedGroupId);
                         selectedGroupId = null;
                         saveAndRender();
-                        location.reload();
                     }
                 }
             });
@@ -647,6 +653,7 @@ tasksContainer.addEventListener("click", e => {
         input.focus(); 
         if(e.target.classList.contains("group-title")){
             input.classList.add("edit-group-title-input");
+            input.closest(".group-tasks").style.backgroundColor = "rgba(255, 255, 255, 0.020)";
             var group = true;
         } else if(e.target.classList.contains("note-title")){
             selectedNote = selectedProject.notes.find(note => note.id === e.target.id);
@@ -664,6 +671,7 @@ tasksContainer.addEventListener("click", e => {
             input.closest(".task-panel").classList.add("editing");
             var task = true;
         }
+
         form.addEventListener("submit", e => {
             e.preventDefault();
             if(input.value != null && input.value.trim() === "") return
