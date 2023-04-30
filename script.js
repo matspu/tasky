@@ -76,6 +76,7 @@ const taskTemplate = document.getElementById("task-template").content;
 const taskPanel = document.querySelector(".task-panel");
 const tasksContainer = document.querySelector(".tasks-container");
 
+const iconSelectContainer = document.querySelector(".icon-select-container");
 
 let iconSource;
 let blankIcon;
@@ -113,6 +114,8 @@ $(".icon-select").click(function(){
     newProjectInput.focus();
     newProjectButton.querySelector("img").src = iconSource;
     document.querySelector(".new-project-button img").style.display = "block";
+    iconSelectContainer.classList.toggle("dropdown-active");
+    iconSelectContainer.classList.toggle("dropdown-exit");
 });
 
 
@@ -271,7 +274,6 @@ function clearElement(element){
 
 
 newProjectButton.addEventListener("click", function(){
-    const iconSelectContainer = document.querySelector(".icon-select-container");
     iconSelectContainer.classList.toggle("dropdown-active");
     iconSelectContainer.classList.toggle("dropdown-exit");
 });
