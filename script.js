@@ -25,12 +25,6 @@ window.addEventListener("click", e => {
         if(!element.classList.contains("dropdown-exit")) element.classList.replace("dropdown-active", "dropdown-exit");
     }
 
-    if (e.target.className != "edit-task-title-input") {
-        console.log("true");
-        const element = document.querySelector(".task-panel");
-        if (!element.classList.contains("editing")) element.classList.toggle("editing");
-    }
-
 
 
     
@@ -41,6 +35,11 @@ window.addEventListener("click", e => {
     }*/
 });
 
+
+window.onclick = e => {
+    console.log(e.target);  // to get the element
+    console.log(e.target.tagName);  // to get the element tag name alone
+} 
 
 
 
@@ -130,7 +129,6 @@ newProjectForm.addEventListener("submit", e => {
     newProjectButton.style.backgroundColor = "transparent";
     document.querySelector(".new-project-button img").src = "";
     document.querySelector(".new-project-button i").style.color = "rgba(255, 255, 255, 0.418)";
-
 });
 
 
@@ -653,7 +651,6 @@ tasksContainer.addEventListener("click", e => {
         input.focus(); 
         if(e.target.classList.contains("group-title")){
             input.classList.add("edit-group-title-input");
-            input.closest(".group-tasks").style.backgroundColor = "rgba(255, 255, 255, 0.020)";
             var group = true;
         } else if(e.target.classList.contains("note-title")){
             selectedNote = selectedProject.notes.find(note => note.id === e.target.id);
