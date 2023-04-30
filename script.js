@@ -281,7 +281,6 @@ newProjectButton.addEventListener("click", function(){
 const newProjectLabel = document.querySelector(".new-project-label");
 const newProjectButtonIcon = document.querySelector(".new-project-button i");
 newProjectLabel.addEventListener("click", e => {
-    //newProjectButtonIcon.classList = "bi bi-calendar";
     newProjectButton.style.backgroundColor = "rgba(128, 128, 128, 0.322)";
     newProjectButton.style.fontSize = "16px";
     newProjectButton.style.pointerEvents = "auto";
@@ -472,11 +471,10 @@ function renderGroups(selectedProject){
             const title = groupElement.querySelector(".group-title");
             const arrow = groupElement.querySelector(".group-tasks-dropdown-arrow");
             const container = groupElement.querySelector(".group-tasks-container");
-            const editButton = groupElement.querySelector(".edit-group-button");
-            const editFunctions = groupElement.querySelector(".edit-group-functions");
+            const deleteButton = groupElement.querySelector(".delete-group-button");
             const plus = groupElement.querySelector(".group-tasks-dropdown-plus");
             arrow.id = group.id;
-            editButton.id = group.id;
+            deleteButton.id = group.id;
             plus.id = group.id;
             title.append(group.title);
             groupElement.appendChild(container);
@@ -495,7 +493,7 @@ function renderGroups(selectedProject){
     
             if(group.enabled){
                 container.style.display = "block";
-                editButton.style.display = "none";
+                deleteButton.style.display = "none";
                 plus.classList.toggle("hide");
                 arrow.classList.toggle("arrow-down");
                 renderGroupsTasks(selectedGroup, container);
@@ -530,22 +528,12 @@ function renderGroups(selectedProject){
             });
 
 
-            
-
-            editButton.addEventListener("click", e => {
-                editFunctions.classList.toggle("dropdown-active");
-                editFunctions.classList.toggle("dropdown-exit");
-            });
-
-            editFunctions.addEventListener("click", e => {
-                if(e.target.tagName.toLowerCase() === "button"){
-                    const button = e.target;
-                    if(button.textContent.includes("Delete")){
-                        selectedProject.groups = selectedProject.groups.filter(group => group.id !== selectedGroupId);
-                        selectedGroupId = null;
-                        saveAndRender();
-                    }
-                }
+            deleteButton.addEventListener("click", e => {
+                selectedProject.groups = selectedProject.groups.filter(group => group.id !== selectedGroupId);
+                selectedGroupId = null;
+                saveAndRender();
+                    
+                
             });
             plus.addEventListener("click", e => {
                 selectedGroupId = e.target.id;

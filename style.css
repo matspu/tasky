@@ -314,7 +314,6 @@ body{
     padding: 6px 16px;
     height: 41px;
     /*background-color: #272A30;*/
-    border: 1px solid transparent;
     border-radius: 0.6rem;
     font-size: 16px;
     list-style: none;
@@ -709,7 +708,7 @@ body{
 }
 
 .group-tasks-dropdown-plus:hover{
-    background-color: #272A30;
+    background-color: #343841;
 }
 
 .group-title{
@@ -919,24 +918,46 @@ body{
     color: rgba(255, 255, 255, 0.418);
 }
 
+  
+.delete-group-button{
+    opacity: 0;
+    align-items: center;
+    padding: 5px;
+    margin: 0;
+    color:rgba(255, 255, 255, 0.8);
+    background-color: transparent;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.group-tasks:hover .delete-group-button{
+    opacity: 1;
+}
+
+.delete-group-button:hover{
+    background-color: #343841;
+}
+
+.delete-group-button i{
+    pointer-events: none;
+}
+  
 
 
-
-
-
-
-
-.edit-group-dropdown{
+.edit-note-dropdown {
     position: relative;
     display: inline-block;
     border-radius: 10px;
     margin-left: auto;
 }
 
-.edit-group-button{
+.edit-note-button {
     visibility: hidden;
     background: none;
-    color:white;
+    color: white;
     padding: 4px 5px;
     border-radius: 7px;
     text-align: center;
@@ -945,16 +966,16 @@ body{
 }
 
 
-.edit-group-button i{
+.edit-note-button i {
     height: 18px;
     pointer-events: none;
 }
 
-.edit-group-button:hover{
+.edit-note-button:hover {
     background-color: #272A30;
 }
-  
-.edit-group-functions{
+
+.edit-note-functions {
     position: absolute;
     background-color: #1D2024;
     overflow: auto;
@@ -966,14 +987,14 @@ body{
     overflow: hidden;
     transition: all 0.15s ease;
 }
-  
-  .edit-group-functions button{
+
+.edit-note-functions button {
     display: flex;
     align-items: center;
     padding: 10px;
     width: 120px;
     margin: 0;
-    color:rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.8);
     background-color: #1D2024;
     text-align: left;
     border-radius: 8px;
@@ -981,12 +1002,12 @@ body{
     font-size: 14px;
     cursor: pointer;
 }
-  
-.edit-group-functions button:hover{
-     background-color: #272A30;
+
+.edit-note-functions button:hover {
+    background-color: #272A30;
 }
 
-.edit-group-functions svg{
+.edit-note-functions svg {
     color: rgba(255, 255, 255, 0.8);
     margin-right: 12px;
 }
