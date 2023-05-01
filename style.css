@@ -675,9 +675,10 @@ body{
 .group-tasks-dropdown-arrow{
     color: rgba(255, 255, 255, 0.479);
     margin-right: 14px;
+    margin-left: 5px;
     cursor: pointer;
     width: 14px;
-    transition: transform 0.3s ease;
+    transition: transform 0.25s ease;
 }
 
 
@@ -694,21 +695,43 @@ body{
 
 
 
-
-
-
-
 .group-tasks-dropdown-plus{
     font-size: 18px;
     border-radius: 8px;
     margin-left: auto;
-    padding: 2px 7px;
+    padding: 2px 8px;
     cursor: pointer;
     color: rgba(255, 255, 255, 0.9);
+    transition: background-color 0.2s ease;
 }
 
 .group-tasks-dropdown-plus:hover{
     background-color: #343841;
+}
+
+.delete-group-button {
+    opacity: 0;
+    padding: 5px 5px 2px 5px;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.8);
+    background-color: transparent;
+    border-radius: 7px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    transition: opacity 0.2s, background-color 0.2s ease;
+}
+
+.group-tasks:hover .delete-group-button {
+    opacity: 1;
+}
+
+.delete-group-button:hover {
+    background-color: #343841;
+}
+
+.delete-group-button i {
+    pointer-events: none;
 }
 
 .group-title{
@@ -725,7 +748,7 @@ body{
     display: none;
     padding: 0px 0px;
     border-left: 2px solid #272A30;
-    margin-left: 23px;
+    margin-left: 27px;
 }
 
 
@@ -756,6 +779,13 @@ body{
     flex-direction: column;
     padding: 8px 16px;
     margin-bottom: 10px;
+    border-radius: 0.6rem;
+    background-color: transparent;
+}
+
+.note-container:hover{
+    background-color: rgba(255, 255, 255, 0.020);
+    
 }
 
 
@@ -797,6 +827,31 @@ body{
     padding: 0;
     font-size: 18px;
     font-weight: 600;
+}
+
+.delete-note-button {
+    opacity: 0;
+    padding: 5px 5px 2px 5px;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.8);
+    background-color: transparent;
+    border-radius: 7px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    transition: opacity 0.2s, background-color 0.2s ease;
+}
+
+.note-container:hover .delete-note-button {
+    opacity: 1;
+}
+
+.delete-note-button:hover {
+    background-color: #343841;
+}
+
+.delete-note-button i {
+    pointer-events: none;
 }
 
 
@@ -918,32 +973,6 @@ body{
     color: rgba(255, 255, 255, 0.418);
 }
 
-  
-.delete-group-button{
-    opacity: 0;
-    align-items: center;
-    padding: 5px;
-    margin: 0;
-    color:rgba(255, 255, 255, 0.8);
-    background-color: transparent;
-    border-radius: 8px;
-    border: none;
-    font-size: 14px;
-    cursor: pointer;
-    transition: opacity 0.2s ease;
-}
-
-.group-tasks:hover .delete-group-button{
-    opacity: 1;
-}
-
-.delete-group-button:hover{
-    background-color: #343841;
-}
-
-.delete-group-button i{
-    pointer-events: none;
-}
   
 
 

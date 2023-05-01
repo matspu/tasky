@@ -27,6 +27,7 @@ window.addEventListener("click", e => {
 
 
 
+
     
     /*
     if(e.target.className !== "icon-select-container"){
@@ -173,7 +174,6 @@ function render(){
         renderTasks(selectedProject); 
         renderGroups(selectedProject);
         renderNotes(selectedProject);
-        messageTasksCompleted();
     }
 }
 
@@ -639,8 +639,11 @@ tasksContainer.addEventListener("click", e => {
         //li.removeChild(title);
         title.style.display = "none";
         input.focus(); 
+
+        // checking which title has been clicked
         if(e.target.classList.contains("group-title")){
             input.classList.add("edit-group-title-input");
+            input.closest(".group-tasks").style.backgroundColor = "rgba(255, 255, 255, 0.020)";
             var group = true;
         } else if(e.target.classList.contains("note-title")){
             selectedNote = selectedProject.notes.find(note => note.id === e.target.id);
@@ -655,10 +658,10 @@ tasksContainer.addEventListener("click", e => {
         } else{
             input.classList.add("edit-task-title-input");
             input.closest(".task-panel").style.backgroundColor = "rgba(255, 255, 255, 0.020)";
-            input.closest(".task-panel").classList.add("editing");
             var task = true;
         }
 
+        // subitting edited title
         form.addEventListener("submit", e => {
             e.preventDefault();
             if(input.value != null && input.value.trim() === "") return
@@ -680,10 +683,6 @@ tasksContainer.addEventListener("click", e => {
     } 
 
 });
-
-
-
-
 
 
 
@@ -716,22 +715,7 @@ function messageCreateProject(){
     messageContainer.appendChild(text);
     tasksContainer.appendChild(messageContainer);
 }
-function messageTasksCompleted(){
-    const selectedProject = projects.find(project => project.id === selectedProjectId);
-    const incompleteTasks = selectedProject.tasks.filter(task => !task.complete).length;
-    const completeTasks = selectedProject.tasks.filter(task => task.complete).length;
-    if(incompleteTasks === 0 && selectedProject.oneCompleteTask && completeTasks === 0){
-        const messageContainer = document.createElement("div");
-        const text = document.createTextNode("You've completed all tasks");
-        const image = new Image();
-        image.src = "images/confetti.png";
-        image.classList.add("message-image");
-        messageContainer.classList.add("message-container");
-        messageContainer.appendChild(image);
-        messageContainer.appendChild(text);
-        tasksContainer.appendChild(messageContainer);
-    }
-}
+
 
 
 
