@@ -531,10 +531,9 @@ function renderGroups(selectedProject){
             deleteButton.addEventListener("click", e => {
                 selectedProject.groups = selectedProject.groups.filter(group => group.id !== selectedGroupId);
                 selectedGroupId = null;
-                saveAndRender();
-                    
-                
+                saveAndRender();  
             });
+
             plus.addEventListener("click", e => {
                 selectedGroupId = e.target.id;
                 const task = createGroupTask()
@@ -750,8 +749,10 @@ function renderNotes(selectedProject){
         const textarea = noteElement.querySelector(".note-dropdown textarea");
         const title = noteElement.querySelector(".note-title");
         const icon = noteElement.querySelector(".note-icon");
+        const deleteButton = noteElement.querySelector(".delete-note-button");
+        deleteButton.id = note.id;
         textarea.value = note.text;
-        title.id = note.id;
+        title.id = note.id; 
         title.append(note.title);
         tasksContainer.appendChild(noteElement);
 
@@ -768,12 +769,16 @@ function renderNotes(selectedProject){
             save();
         });
 
-
-        
-
         icon.addEventListener("click", e => {
             dropdown.classList.toggle("hide");
             textarea.focus();
+        });
+
+        deleteButton.addEventListener("click", e => {
+            let selectedNoteId = e.target.id;
+            selectedProject.notes = selectedProject.notes.filter(note => note.id !== selectedNoteId);
+            selectedNoteId = null;
+            saveAndRender();  
         });
     });
 }
