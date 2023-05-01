@@ -53,7 +53,6 @@ const LOCAL_STORAGE_SELECTED_PROJECT_ID_KEY = "LOCAL_STORAGE_SELECTED_PROJECT_ID
 const LOCAL_STORAGE_ONE_COMPLETE_TASK_KEY = "LOCAL_STORAGE_ONE_COMPLETE_TASK_KEY";
 const LOCAL_STORAGE_SELECTED_GROUP_ID_KEY = "LOCAL_STORAGE_SELECTED_GROUP_ID_KEY";
 
-
 const projectsList = document.querySelector(".projects-list");
 
 
@@ -474,6 +473,7 @@ function renderGroups(selectedProject){
             const deleteButton = groupElement.querySelector(".delete-group-button");
             const plus = groupElement.querySelector(".group-tasks-dropdown-plus");
             arrow.id = group.id;
+            title.id = group.id;
             deleteButton.id = group.id;
             plus.id = group.id;
             title.append(group.title);
@@ -493,7 +493,6 @@ function renderGroups(selectedProject){
     
             if(group.enabled){
                 container.style.display = "block";
-                deleteButton.style.display = "none";
                 plus.classList.toggle("hide");
                 arrow.classList.toggle("arrow-down");
                 renderGroupsTasks(selectedGroup, container);
@@ -529,6 +528,7 @@ function renderGroups(selectedProject){
 
 
             deleteButton.addEventListener("click", e => {
+                selectedGroupId = e.target.id;
                 selectedProject.groups = selectedProject.groups.filter(group => group.id !== selectedGroupId);
                 selectedGroupId = null;
                 saveAndRender();  
