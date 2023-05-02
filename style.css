@@ -83,7 +83,7 @@ body{
     border-radius: 12px;
     cursor: pointer;
     user-select: none;
-    font-size: 15px;
+    font-size: 16px;
     opacity: 0.6;
     background-color: transparent;
     transition: opacity 0.2s ease, background-color 0.2s ease;
@@ -96,10 +96,11 @@ body{
 
 .project:hover .project-tasks-count{
     display: block;
+    font-size: 14px;
 }
 
 .project-title{
-    font-size: 16px;
+    font-size: 15px;
     margin: 0px;
     line-height: 30px; 
     pointer-events: none;   
@@ -107,7 +108,7 @@ body{
 
 .project-tasks-count{
     display: none;
-    font-size: 15px;
+    font-size: 14px;
     margin: 0px 8px 0px auto;
     line-height: 30px;
     pointer-events: none;
@@ -120,8 +121,8 @@ body{
 }
 
 .projects-list img{
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
     margin-right: 12px;
     pointer-events: none;
 }
