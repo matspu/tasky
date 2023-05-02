@@ -562,8 +562,11 @@ function renderGroupsTasks(selectedGroup, container){
         const label = taskElement.querySelector("label");
         label.htmlFor = task.id;
         title.append(task.title);
-        const dueDateDetailsForm = taskElement.querySelector(".task-due-date-details");
-        const dueDateInput = taskElement.querySelector(".task-due-date-details input")
+        const groupDueDateIcon = taskElement.querySelector(".group-task-due-date-details i");       // get rid of unimportant elements
+        const dueDateDetailsForm = taskElement.querySelector(".group-task-due-date-details");
+        const dueDateInput = taskElement.querySelector(".group-task-title-input");
+        const groupDueDateInput = taskElement.querySelector(".group-task-due-date-details input");
+        const groupDueDateDetails = taskElement.querySelector(".group-task-due-date-details");
         const dueDate = taskElement.querySelector(".task-due-date-text");  
         if (task.dueDate == null || task.dueDate.trim() === "") taskElement.querySelector(".task-due-date").style.visibility = "hidden";       
         dueDate.append(task.dueDate);
@@ -584,11 +587,44 @@ function renderGroupsTasks(selectedGroup, container){
             saveAndRender();
         });
 
+
+        
+
+
+        groupDueDateIcon.addEventListener("click", e => {
+            console.log("click");
+            if(groupDueDateInput.style.display === "none"){
+                groupDueDateInput.style.display = "block";
+                groupDueDateDetails.style.backgroundColor = "#272A30";
+            } else{
+                groupDueDateInput.style.display = "none";
+                groupDueDateDetails.style.backgroundColor = "#272A30";
+            }
+        });
+        
+        
+
+        /*
+        e.preventDefault();
+        const title = newTaskPanelInput.value;
+        const dueDate = dueDateInput.value;
+        if (title == null || title.trim() === "") return
+        const task = createTask(title, dueDate);
+        newTaskPanelInput.value = null;
+        dueDateInput.value = null;
+        const selectedProject = projects.find(project => project.id === selectedProjectId);
+        selectedProject.tasks.push(task);
+        saveAndRender();
+        taskFormAnimationBackwards();
+        */
+
         if(task.dueDate !== ""){
             dueDateDetailsForm.style.display = "none";
         }
     });
 }
+
+
 
 
 

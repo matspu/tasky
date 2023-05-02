@@ -964,6 +964,42 @@ body{
     color: rgba(255, 255, 255, 0.418);
 }
 
+.group-task-due-date-details {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #272A30;
+    margin-left: auto;
+}
+
+.group-task-due-date-details i {
+    position: realtive;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    padding: 6px 7px 6px;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.group-task-due-date-details i:hover {
+    background-color: #202227;
+}
+
+.group-task-due-date-details input {
+    display: none;
+    padding: 0px;
+    width: 0px;
+    font-size: 14px;
+    border: none;
+    color: rgba(255, 255, 255, 0.9);
+    animation: dueDateInput 0.4s ease;
+    animation-fill-mode: forwards;
+}
+
+.group-task-due-date-details input::placeholder {
+    color: rgba(255, 255, 255, 0.418);
+}
+
   
 
 
