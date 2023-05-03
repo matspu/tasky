@@ -592,7 +592,6 @@ function renderGroupsTasks(selectedGroup, container){
 
 
         groupDueDateIcon.addEventListener("click", e => {
-            console.log("click");
             if(groupDueDateInput.style.display === "none"){
                 groupDueDateInput.style.display = "block";
                 groupDueDateDetails.style.backgroundColor = "#272A30";
