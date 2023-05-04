@@ -484,7 +484,6 @@ function renderGroups(selectedProject){
             title.append(group.title);
             groupElement.appendChild(container);
             tasksContainer.appendChild(groupElement);
-            container.style.maxHeight = "200px";
     
             const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
     
@@ -497,13 +496,14 @@ function renderGroups(selectedProject){
             }
     
             if(group.enabled){
-                container.style.display = "block";
                 plus.classList.toggle("hide");
                 arrow.classList.toggle("arrow-down");
+                container.classList.add("dropdown-active");
                 renderGroupsTasks(selectedGroup, container);
                 // render only one selectedGroup tasks whenever multiple groups are selected
-            } else{
-                container.style.display = "none";
+            } else {
+                container.classList.toggle("dropdown-exit");
+                //container.style.display = "none";
             }
     
     
@@ -516,16 +516,18 @@ function renderGroups(selectedProject){
                 plus.classList.toggle("hide");
                 arrow.classList.toggle("arrow-down");
     
-                if(container.style.display === "block"){
-                    container.style.display = "none";
+                if (container.classList.contains("dropdown-exit")) {
+                    container.classList.toggle("dropdown-exit");
+                    container.classList.toggle("dropdown-active");
                     group.enabled = false;
-                } else{
-                    container.style.display = "block";
+                } else {
+                    container.classList.toggle("dropdown-active");
+                    container.classList.toggle("dropdown-exit");
                     group.enabled = true;
                 }
                 
-                save();
                 renderGroupsTasks(selectedGroup, container);
+                save();
                 
             });
 
@@ -542,6 +544,7 @@ function renderGroups(selectedProject){
                 const task = createGroupTask()
                 const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
                 selectedGroup.tasks.push(task);
+                selectedGroup.enabled = true;
                 saveAndRender();
             }); 
         });
@@ -603,7 +606,7 @@ function renderGroupsTasks(selectedGroup, container){
                 groupDueDateDetails.style.backgroundColor = "#272A30";
             } else{
                 groupDueDateInput.style.display = "none";
-                groupDueDateDetails.style.backgroundColor = "#272A30";
+                groupDueDateDetails.style.backgroundColor = "transparent";
             }
         });
         
