@@ -8,6 +8,7 @@ window.addEventListener("click", e => {
     
     if(e.target !== newTaskPanelInput && e.target !== dueDateIcon && e.target !== dueDateInput){ 
         newTaskPanelInput.classList.toggle("selected");
+        dueDateDetails.style.backgroundColor = "transparent";
         taskFormAnimationBackwards();
     }
     if(e.target.className !== "new-element-button"){
@@ -326,6 +327,7 @@ newTaskPanelInput.addEventListener("click", function() {
         dueDateInput.style.display = "none";
         dueDateIcon.style.display = "block";
         dueDateDetails.style.display = "flex";
+        dueDateDetails.style.backgroundColor = "transparent";
     }
 });
 
@@ -337,6 +339,7 @@ newTaskPanelForm.addEventListener("submit", e => {
     const task = createTask(title, dueDate);
     newTaskPanelInput.value = null;
     dueDateInput.value = null;
+    dueDateDetails.style.backgroundColor = "transparent";
     const selectedProject = projects.find(project => project.id === selectedProjectId);
     selectedProject.tasks.push(task);
     saveAndRender();
@@ -354,6 +357,7 @@ dueDateDetails.addEventListener("submit", e => {
     const task = createTask(title, dueDate);
     newTaskPanelInput.value = null;
     dueDateInput.value = null;
+    dueDateDetails.style.backgroundColor = "transparent";
     const selectedProject = projects.find(project => project.id === selectedProjectId);
     selectedProject.tasks.push(task);
     saveAndRender();
@@ -392,6 +396,7 @@ const dueDateIcon = document.querySelector(".task-due-date-details i");
 dueDateIcon.addEventListener("click", function () {
     if(dueDateInput.style.display === "none"){
         dueDateInput.style.display = "block";
+        dueDateInput.focus();
         dueDateDetails.style.backgroundColor = "#1a1c1e8c";
     } else{
         dueDateInput.style.display = "none";
@@ -507,11 +512,9 @@ function renderGroups(selectedProject){
                 selectedGroupId = e.target.id;
                 const selectedProject = projects.find(project => project.id === selectedProjectId);
                 const deselectGroup = selectedProject.groups.filter(group => group.id !== selectedGroupId);
-                deselectGroup.forEach(group => {group.enabled = false;});
+                deselectGroup.forEach(group => { group.enabled = false; });
                 plus.classList.toggle("hide");
-
                 arrow.classList.toggle("arrow-down");
-
     
                 if(container.style.display === "block"){
                     container.style.display = "none";
@@ -579,6 +582,8 @@ function renderGroupsTasks(selectedGroup, container){
             title.classList.toggle("empty");
         }
 
+
+
         dueDateDetailsForm.addEventListener("submit", e => {
             e.preventDefault();
             const dueDate = dueDateInput.value;
@@ -594,6 +599,7 @@ function renderGroupsTasks(selectedGroup, container){
         groupDueDateIcon.addEventListener("click", e => {
             if(groupDueDateInput.style.display === "none"){
                 groupDueDateInput.style.display = "block";
+                groupDueDateInput.focus();
                 groupDueDateDetails.style.backgroundColor = "#272A30";
             } else{
                 groupDueDateInput.style.display = "none";
@@ -706,7 +712,7 @@ tasksContainer.addEventListener("click", e => {
                 selectedGroup.title = input.value;
             } else if(note){
                 selectedNote.title = input.value;
-            } else if(groupTask){
+            } else if (groupTask) {
                 selectedGroupTask.title = input.value;
             } else{
                 selectedTask.title = input.value;

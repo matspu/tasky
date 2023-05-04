@@ -703,7 +703,7 @@ body{
     padding: 2px 8px;
     cursor: pointer;
     color: rgba(255, 255, 255, 0.9);
-    transition: background-color 0.2s ease;
+    transition: opacity 0.2s, background-color 0.2s ease;
 }
 
 .group-tasks-dropdown-plus:hover{
@@ -714,8 +714,8 @@ body{
     opacity: 0;
     padding: 5px 5px 2px 5px;
     margin: 0;
-    color: rgba(255, 255, 255, 0.8);
     background-color: transparent;
+    color: rgba(255, 255, 255, 0.8);
     border-radius: 7px;
     border: none;
     font-size: 14px;
@@ -723,9 +723,10 @@ body{
     transition: opacity 0.2s, background-color 0.2s ease;
 }
 
-.group-tasks:hover .delete-group-button {
+.group-tasks:hover .delete-group-button{
     opacity: 1;
 }
+
 
 .delete-group-button:hover {
     background-color: #343841;
@@ -968,7 +969,6 @@ body{
     display: flex;
     align-items: center;
     border-radius: 10px;
-    background-color: #272A30;
     margin-left: auto;
 }
 
@@ -979,10 +979,11 @@ body{
     padding: 6px 7px 6px;
     border-radius: 10px;
     font-size: 14px;
+    transition: background-color 0.2 ease;
 }
 
 .group-task-due-date-details i:hover {
-    background-color: #202227;
+    background-color: #272A30;
 }
 
 .group-task-due-date-details input {
