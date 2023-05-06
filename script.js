@@ -484,7 +484,6 @@ function renderGroups(selectedProject){
             title.append(group.title);
             groupElement.appendChild(container);
             tasksContainer.appendChild(groupElement);
-            container.style.maxHeight = "200px";
     
             const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
     
@@ -524,8 +523,7 @@ function renderGroups(selectedProject){
                     group.enabled = true;
                 }
                 
-                save();
-                renderGroupsTasks(selectedGroup, container);
+                saveAndRender();
                 
             });
 
