@@ -617,6 +617,7 @@ body{
     display: none;
 }
 
+
 .edit-project-input{
     width: 110px;
     background-color: transparent;
@@ -972,19 +973,22 @@ body{
 
 .group-task-due-date-details {
     display: flex;
+    opacity: 0;
     align-items: center;
     border-radius: 10px;
     margin-left: auto;
+    transition: opacity 0.2s ease
 }
 
 .group-task-due-date-details i {
     position: realtive;
     color: rgba(255, 255, 255, 0.8);
     cursor: pointer;
+    background-color: transparent;
     padding: 6px 7px 6px;
     border-radius: 10px;
     font-size: 14px;
-    transition: background-color 0.2 ease;
+    transition: background-color 0.2s ease;
 }
 
 .group-task-due-date-details i:hover {
