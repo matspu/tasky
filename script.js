@@ -497,10 +497,9 @@ function renderGroups(selectedProject){
     
             if(group.enabled){
                 container.style.display = "block";
-                plus.classList.toggle("hide");
+                plus.style.opacity = "1";
                 arrow.classList.toggle("arrow-down");
                 renderGroupsTasks(selectedGroup, container);
-                // render only one selectedGroup tasks whenever multiple groups are selected
             } else{
                 container.style.display = "none";
             }
@@ -512,7 +511,6 @@ function renderGroups(selectedProject){
                 const selectedProject = projects.find(project => project.id === selectedProjectId);
                 const deselectGroup = selectedProject.groups.filter(group => group.id !== selectedGroupId);
                 deselectGroup.forEach(group => { group.enabled = false; });
-                plus.classList.toggle("hide");
                 arrow.classList.toggle("arrow-down");
     
                 if(container.style.display === "block"){
@@ -540,6 +538,7 @@ function renderGroups(selectedProject){
                 const task = createGroupTask()
                 const selectedGroup = selectedProject.groups.find(group => group.id === selectedGroupId);
                 selectedGroup.tasks.push(task);
+                selectedGroup.enabled = true;
                 saveAndRender();
             }); 
         });
@@ -589,9 +588,7 @@ function renderGroupsTasks(selectedGroup, container){
             task.dueDate = dueDate; 
             saveAndRender();
         });
-
-
-        
+            
 
 
         groupDueDateIcon.addEventListener("click", e => {
@@ -601,7 +598,7 @@ function renderGroupsTasks(selectedGroup, container){
                 groupDueDateDetails.style.backgroundColor = "#272A30";
             } else{
                 groupDueDateInput.style.display = "none";
-                groupDueDateDetails.style.backgroundColor = "#272A30";
+                groupDueDateDetails.style.backgroundColor = "transparent";
             }
         });
         
@@ -692,6 +689,7 @@ tasksContainer.addEventListener("click", e => {
             var selectedGroupTask = selectedGroup.tasks.find(task => task.id === e.target.id);
             input.classList.add("edit-task-title-input");
             input.closest(".task-panel").style.backgroundColor = "rgba(255, 255, 255, 0.020)";
+            //input.closest(".task-panel").querySelector(".group-task-due-date-details i").classList.toggle("hide");
             var groupTask = true;
         } else{
             input.classList.add("edit-task-title-input");
@@ -712,6 +710,8 @@ tasksContainer.addEventListener("click", e => {
                 selectedNote.title = input.value;
             } else if (groupTask) {
                 selectedGroupTask.title = input.value;
+                console.log(li);
+                li.querySelector(".group-task-due-date-details i").classList.add("hide");
             } else{
                 selectedTask.title = input.value;
             }

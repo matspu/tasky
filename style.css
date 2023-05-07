@@ -697,6 +697,7 @@ body{
 
 
 .group-tasks-dropdown-plus{
+    opacity: 0;
     font-size: 18px;
     border-radius: 8px;
     margin-left: auto;
@@ -708,6 +709,10 @@ body{
 
 .group-tasks-dropdown-plus:hover{
     background-color: #343841;
+}
+
+.group-tasks:hover .group-tasks-dropdown-plus{
+    opacity: 1;
 }
 
 .delete-group-button {
