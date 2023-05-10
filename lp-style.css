@@ -4,15 +4,40 @@
 }
 
 body{
-   display: flex;
-   flex-direction: column;
-   padding: 0px 10%;
    background-color: #131517;
+   overflow: hidden;
    font-family: "Roboto", sans-serif;
    font-size: 16px;
    color: white;
+   padding: 0px 10%;
    height: 100vh;
 }
+
+#blob{
+   z-index: -1;
+   height: 80px;
+   aspect-ratio: 1;
+   position: absolute;
+   left: 50%;
+   top: 50%;
+   translate: -50% -50%;
+   border-radius: 50%;
+   background: linear-gradient(to right, aquamarine, mediumpurple);
+   animation: rotate 20s infinite; 
+   filter: blur(40px);
+}
+
+@keyframes rotate{
+   from {
+      rotate: 0deg;
+   }
+   to{
+      rotate: 360deg;
+   }
+}
+
+
+
 
 .nav-bar{
    display: flex;
@@ -43,8 +68,10 @@ body{
 }
 
 .nav-bar button{
+   display: flex;
+   align-items: center;
    height: 40px;
-   padding: 10px 14px;
+   padding: 10px 0px;
    background-color: #272A30;
    border: 0px;
    border-radius: 10px;
@@ -53,12 +80,66 @@ body{
    margin-left: auto;
 }
 
+.nav-bar a{
+   line-height: 40px;
+   width: 95px;
+   color: white;
+   text-decoration: none;
+}
+
 .main{
    display: flex;
+   padding: 28px;
+   flex-direction: row;
    height: 100%;
-   background-color: rgba(56, 56, 56, 0.404);
 }
 
 .hero-text{
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   justify-content: center;
    height: 50%;
+   width: 50%;
+}
+
+.hero-text h1{
+   font-size: 40px;
+}
+
+.hero-text p{
+   margin-top: 10px;
+   color: rgba(255, 255, 255, 0.384);
+}
+
+.hero-text button {
+   display: flex;
+   align-items: center;
+   height: 40px;
+   padding: 10px 0px;
+   background-color: #272A30;
+   border: 0px;
+   border-radius: 10px;
+   color: white;
+   cursor: pointer;
+   margin-top: 24px;
+}
+
+.hero-text a {
+   line-height: 40px;
+   width: 95px;
+   color: white;
+   text-decoration: none;
+}
+
+.hero-image{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 50%;
+   width: 50%;
+}
+
+.hero-image img{
+   height: 80%;
 }
