@@ -32,3 +32,21 @@ document.getElementById("cards").onmousemove = e => {
 document.getElementById("cards").onmouseleave = e => {
    blob.style.opacity = "0.6";
 }
+
+const heroImage = document.querySelector(".hero-image-card");
+const arrow = document.querySelector(".group-tasks-dropdown-arrow i");
+const groupTasksContainer = document.querySelector(".group-tasks-container");
+
+arrow.addEventListener("click", e => {
+   if (groupTasksContainer.style.display === "block") {
+      groupTasksContainer.style.display = "none";
+      arrow.setAttribute("class", "bi bi-chevron-right");
+   } else {
+      groupTasksContainer.style.display = "block";
+      arrow.setAttribute("class", "bi bi-chevron-down");
+   }
+});
+
+heroImage.onmousemove = e => {
+   blob.style.opacity = "0";
+};

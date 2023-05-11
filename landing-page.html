@@ -7,6 +7,7 @@
       <title>tasky</title>
       <link rel="stylesheet" href="lp-style.css">
       <script defer src="lp-script.js"></script>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
    </head>
 
    <body>
@@ -21,14 +22,63 @@
       </div>
          
       <div class="main">
-         <div style="display:flex; flex-direction:row;">
+         <div style="display:flex; flex-direction:row; height: 100%;">
             <div class="hero-text">
                <h1>TO DO LIST</h1>
                <p>get things done with the best to-do list</p>
                <button><a href="index.html">Get started</a></button>
             </div>
             <div class="hero-image">
-               <img src="images/confetti.png">
+               <div class="hero-image-card">
+                  <div style="display:flex; align-items: center; margin-bottom: 20px; margin-left: 5px;">
+                     <img src="images/icons/book.svg" style="margin-right:10px; height:30px; width:30px;">
+                     <h3> Tasks to do</h3>
+                  </div>
+                  
+                  <label>
+                     <input type="checkbox" class="checkmark">
+                     <span class="checkbox">
+                        <i class="bi bi-check-lg"></i>
+                     </span>
+                     <p>title</p>
+                  </label>
+                  <label>
+                     <input type="checkbox" class="checkmark">
+                     <span class="checkbox">
+                        <i class="bi bi-check-lg"></i>
+                     </span>
+                     <p>title</p>
+                  </label>
+                  <label>
+                     <input type="checkbox" class="checkmark">
+                     <span class="checkbox">
+                        <i class="bi bi-check-lg"></i>
+                     </span>
+                     <p>title</p>
+                  </label>
+                  <div class="group-tasks">
+                     <div class="group-tasks-dropdown">
+                        <span class="group-tasks-dropdown-arrow"><i class="bi bi-chevron-right"></i></span>
+                        <span class="group-title">title</span>
+                     </div>
+                     <ul class="group-tasks-container">
+                        <label>
+                           <input type="checkbox" class="checkmark">
+                           <span class="checkbox">
+                              <i class="bi bi-check-lg"></i>
+                           </span>
+                           <p>title</p>
+                        </label>
+                        <label>
+                           <input type="checkbox" class="checkmark">
+                           <span class="checkbox">
+                              <i class="bi bi-check-lg"></i>
+                           </span>
+                           <p>title</p>
+                        </label>
+                     </ul>
+                  </div>
+               </div>
             </div>
          </div>
          

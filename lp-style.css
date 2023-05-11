@@ -13,6 +13,10 @@ body{
    height: 100vh;
 }
 
+.hide{
+   display: none;
+}
+
 #blob{
    z-index: -1;
    height: 80px;
@@ -104,7 +108,7 @@ body{
    flex-direction: column;
    align-items: flex-start;
    justify-content: center;
-   height: 50%;
+   height: 70%;
    width: 50%;
 }
 
@@ -141,12 +145,106 @@ body{
    display: flex;
    align-items: center;
    justify-content: center;
-   height: 50%;
+   height: 70%;
    width: 50%;
 }
 
-.hero-image img{
-   height: 80%;
+.hero-image-card{
+   width: 300px;
+   height: 360px;
+   border: 1px solid rgba(128, 128, 128, 0.473);
+   border-radius: 10px; 
+   background-color: rgba(255, 255, 255, 0.048);
+   padding: 20px;
+}
+
+
+.hero-image-card label {
+   display: flex;
+   align-items: center;
+   color: white;
+   background-color: transparent;
+   padding: 5px 8px;
+   border-radius: 10px;
+   transition: background-color 0.2s ease;
+}
+
+.hero-image-card label:hover{
+   background-color: rgba(128, 128, 128, 0.397);
+}
+
+.checkmark {
+   visibility: hidden;
+   position: absolute;
+   transform: scale(0);
+}
+
+.checkbox {
+   display: grid;
+   place-items: center;
+   width: 24px;
+   height: 24px;
+   margin-right: 14px;
+   border-radius: 8px;
+   /*background-color: #1a1c1e8c;*/
+   border: 2px solid #272A30;
+   cursor: pointer;
+}
+
+.checkbox:hover {
+   background-color: #1a1c1ea6;
+}
+
+.checkbox i {
+   display: none;
+   color: rgba(255, 255, 255, 0.8);
+   font-size: 16px;
+   height: 16.5px;
+}
+
+
+
+.checkmark:checked~.checkbox {
+   background-color: #272A30;
+}
+
+
+
+.checkmark:checked~.checkbox i {
+   display: block;
+}
+
+.group-tasks-dropdown{
+   margin-top: 10px;
+   margin-bottom: 5px;
+   padding: 7px 8px;
+   transition: background-color 0.2s ease;
+   border-radius: 10px;
+}
+
+.group-tasks-dropdown:hover {
+   background-color: rgba(128, 128, 128, 0.397);
+}
+
+.group-tasks-dropdown-arrow{
+   margin-left: 5px;
+   cursor: pointer;
+   margin-right: 14px;
+}
+
+.arrow-down{
+   transform: rotate(90deg);
+}
+
+.group-tasks-container{
+   display: none;
+   margin-left:20px;
+   padding: 0;
+   border-left: 2px solid #272A30;
+}
+
+.group-tasks-container label{
+   margin-left: 10px;
 }
 
 #cards{
@@ -156,7 +254,6 @@ body{
    max-width: 916px;
    width: calc(100% - 20px);
 }
-
 
 
 #cards:hover > .card > .card-border{
