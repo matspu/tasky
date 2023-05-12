@@ -170,7 +170,13 @@ body{
 }
 
 .hero-image-card label:hover{
-   background-color: rgba(128, 128, 128, 0.397);
+   background-color: rgba(255, 255, 255, 0.06);
+}
+
+
+
+.hero-image-card > label > p{
+   font-size: 16px;
 }
 
 .checkmark {
@@ -182,7 +188,7 @@ body{
 .checkbox {
    display: grid;
    place-items: center;
-   width: 24px;
+   width: 28px;
    height: 24px;
    margin-right: 14px;
    border-radius: 8px;
@@ -192,7 +198,7 @@ body{
 }
 
 .checkbox:hover {
-   background-color: #1a1c1ea6;
+   background-color: #22252b;
 }
 
 .checkbox i {
@@ -223,7 +229,7 @@ body{
 }
 
 .group-tasks-dropdown:hover {
-   background-color: rgba(128, 128, 128, 0.397);
+   background-color: rgba(255, 255, 255, 0.06);
 }
 
 .group-tasks-dropdown-arrow{
