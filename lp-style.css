@@ -141,12 +141,33 @@ body{
    text-decoration: none;
 }
 
+pre {
+   position: relative;
+   transform: perspective(5000px) rotateY(var(--rotateX)) rotateX(var(--rotateY));
+}
+
+
+
+
+/* shadow */
+/*
+pre::before {
+   inset: 0.75rem;
+   border-radius: inherit;
+   background: black;
+   z-index: -1;
+   transform: translateZ(-50px);
+   filter: blur(15px);
+   opacity: 0.5;
+}
+*/
+
 .hero-image{
    display: flex;
    align-items: center;
    justify-content: center;
-   height: 70%;
-   width: 50%;
+   position: relative;
+   transform: perspective(5000px) rotateY(var(--rotateX)) rotateX(var(--rotateY));
 }
 
 .hero-image-card{
@@ -325,6 +346,5 @@ body{
    height: calc(100% - 2px);
    width: calc(100% - 2px);
 }
-
 
 

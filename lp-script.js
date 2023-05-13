@@ -50,3 +50,32 @@ arrow.addEventListener("click", e => {
 heroImage.onmousemove = e => {
    blob.style.opacity = "0";
 };
+
+
+
+
+
+const pre = document.querySelector(".hero-image");
+
+document.addEventListener("mousemove", e => {
+  rotateElement(e, pre);
+});
+
+function rotateElement(event, element) {
+  // get mouse position
+  const x = event.clientX;
+  const y = event.clientY;
+
+  // find the middle
+  const middleX = window.innerWidth / 2;
+  const middleY = window.innerHeight / 2;
+
+  // get offset from middle as a percentage
+  // and tone it down a little
+  const offsetX = ((x - middleX) / middleX) * 15;
+  const offsetY = ((y - middleY) / middleY) * 15;
+
+  // set rotation
+  element.style.setProperty("--rotateX", offsetX + "deg");
+  element.style.setProperty("--rotateY", -1 * offsetY + "deg");
+}
