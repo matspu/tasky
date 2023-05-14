@@ -98,9 +98,11 @@ body{
 
 .main{
    display: flex;
+   align-items: center;
    padding: 28px;
    flex-direction: column;
    height: 100%;
+   width: 100%;
 }
 
 .hero-text{
@@ -108,7 +110,7 @@ body{
    flex-direction: column;
    align-items: flex-start;
    justify-content: center;
-   height: 70%;
+   height: 50%;
    width: 50%;
 }
 
