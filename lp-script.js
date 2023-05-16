@@ -1,7 +1,8 @@
 
-const blob = document.getElementById("blob");
 
 // blob animation
+const blob = document.getElementById("blob");
+
 document.body.onpointermove = e => {
    blob.style.opacity = "0.6";
 
@@ -54,7 +55,7 @@ heroImage.onmousemove = e => {
 
 
 
-
+// card tilting effect
 const pre = document.querySelector(".hero-image");
 
 document.addEventListener("mousemove", e => {

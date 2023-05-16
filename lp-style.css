@@ -197,7 +197,6 @@ pre::before {
 }
 
 
-
 .hero-image-card > label > p{
    font-size: 16px;
 }
@@ -236,7 +235,6 @@ pre::before {
 .checkmark:checked~.checkbox {
    background-color: #272A30;
 }
-
 
 
 .checkmark:checked~.checkbox i {
@@ -340,6 +338,10 @@ pre::before {
 }
 
 .card > .card-content{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: space-evenly;
    position: relative;
    z-index: 2;
    background-color: rgb(23, 23, 23);
@@ -347,6 +349,10 @@ pre::before {
    margin: 1px;
    height: calc(100% - 2px);
    width: calc(100% - 2px);
+}
+
+.card-content > img{
+   height: 160px;
 }
 
 
