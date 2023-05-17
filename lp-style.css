@@ -111,7 +111,8 @@ body{
    align-items: flex-start;
    justify-content: center;
    height: 50%;
-   width: 50%;
+   width: 100%;
+   padding-left: 100px;
 }
 
 .hero-text h1{
@@ -170,10 +171,11 @@ pre::before {
    justify-content: center;
    position: relative;
    transform: perspective(5000px) rotateY(var(--rotateX)) rotateX(var(--rotateY));
+   width: 100%;
 }
 
 .hero-image-card{
-   width: 300px;
+   width: 320px;
    height: 360px;
    border: 1px solid rgba(128, 128, 128, 0.473);
    border-radius: 10px; 
@@ -187,7 +189,7 @@ pre::before {
    align-items: center;
    color: white;
    background-color: transparent;
-   padding: 5px 8px;
+   padding: 6px 8px;
    border-radius: 10px;
    transition: background-color 0.2s ease;
 }
