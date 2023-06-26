@@ -291,10 +291,10 @@ pre::before {
 
 .card{
    position: relative;
-   background-color: rgba(255, 255, 255, 0.1);
+   background-color: #131517;
    height: 260px;
    width: 300px;
-   border-radius: 10px; 
+   border-radius: 20px; 
    cursor: pointer;
 }
 
@@ -331,7 +331,7 @@ pre::before {
 
 .card::before{
    z-index: 3;
-   background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 40%);
+   background: radial-gradient(1400px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 20%);
 }
 
 .card > .card-border{
@@ -346,7 +346,8 @@ pre::before {
    justify-content: space-evenly;
    position: relative;
    z-index: 2;
-   background-color: rgb(23, 23, 23);
+   border: 1px solid rgba(128, 128, 128, 0.185);
+   background-color: #131517;
    border-radius: inherit;
    margin: 1px;
    height: calc(100% - 2px);
