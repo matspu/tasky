@@ -331,7 +331,7 @@ pre::before {
 
 .card::before{
    z-index: 3;
-   background: radial-gradient(1400px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 20%);
+   background: radial-gradient(1000px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 20%);
 }
 
 .card > .card-border{
