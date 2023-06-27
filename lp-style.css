@@ -9,7 +9,7 @@ body{
    font-family: "Roboto", sans-serif;
    font-size: 16px;
    color: white;
-   padding: 0px 10%;
+   padding: 0px 5%;
    height: 100vh;
 }
 
@@ -53,6 +53,8 @@ body{
    align-items: center;
    height: 120px;
    width: 100%;
+   padding-right: 100px;
+   padding-left: 94px;
 }
 
 .nav-bar-logo{
@@ -100,6 +102,7 @@ body{
    display: flex;
    align-items: center;
    padding: 28px;
+   padding-top: 0px;
    flex-direction: column;
    height: 100%;
    width: 100%;
@@ -116,11 +119,14 @@ body{
 }
 
 .hero-text h1{
-   font-size: 40px;
+   font-size: 54px;
+   background: linear-gradient(to right,#4c67ff, #72abff);
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
 }
 
 .hero-text p{
-   margin-top: 10px;
+   margin-top: 14px;
    color: rgba(255, 255, 255, 0.384);
 }
 
@@ -134,7 +140,7 @@ body{
    border-radius: 10px;
    color: white;
    cursor: pointer;
-   margin-top: 24px;
+   margin-top: 40px;
 }
 
 .hero-text a {
@@ -170,7 +176,6 @@ pre::before {
    align-items: center;
    justify-content: center;
    position: relative;
-   transform: perspective(5000px) rotateY(var(--rotateX)) rotateX(var(--rotateY));
    width: 100%;
 }
 
@@ -179,10 +184,33 @@ pre::before {
    height: 360px;
    border: 1px solid rgba(128, 128, 128, 0.473);
    border-radius: 10px; 
-   background-color: rgba(255, 255, 255, 0.048);
+   background-color: #1E2022;
+   transform: perspective(5000px) rotateY(var(--rotateX)) rotateX(var(--rotateY));
    padding: 20px;
 }
 
+.hero-image::before{
+   content: "";
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   height: 300px;
+   width: 300px;
+   border-radius: 100%;
+   background-color: #546DFF;
+   filter: blur(100px);
+   opacity: 0.35;
+}
+
+.hero-image-arrow{
+   display: flex;
+   flex-direction: row;
+   margin-left: 40px;
+}
+
+.hero-image-arrow svg{
+   width: 50px;
+}
 
 .hero-image-card label {
    display: flex;
@@ -278,9 +306,9 @@ pre::before {
 
 #cards{
    display: flex;
+   justify-content: center;
    flex-wrap: wrap;
-   gap: 8px;
-   max-width: 916px;
+   gap: 16px;
    width: calc(100% - 20px);
 }
 

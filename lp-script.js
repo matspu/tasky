@@ -57,7 +57,7 @@ heroImage.onmousemove = e => {
 
 
 // card tilting effect
-const pre = document.querySelector(".hero-image");
+const pre = document.querySelector(".hero-image-card");
 
 document.addEventListener("mousemove", e => {
   rotateElement(e, pre);
