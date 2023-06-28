@@ -208,8 +208,9 @@ pre::before {
    margin-left: 40px;
 }
 
-.hero-image-arrow svg{
-   width: 50px;
+.hero-image-arrow img{
+   margin-right: 8px;
+   -webkit-user-drag: none;
 }
 
 .hero-image-card label {
