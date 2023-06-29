@@ -115,7 +115,7 @@ body{
    justify-content: center;
    height: 50%;
    width: 100%;
-   padding-left: 100px;
+   padding-left: 150px;
 }
 
 .hero-text h1{
@@ -175,7 +175,6 @@ pre::before {
    display: flex;
    align-items: center;
    justify-content: center;
-   position: relative;
    width: 100%;
 }
 
@@ -187,19 +186,19 @@ pre::before {
    background-color: #1E2022;
    transform: perspective(5000px) rotateY(var(--rotateX)) rotateX(var(--rotateY));
    padding: 20px;
+   margin-left: auto;
 }
 
-.hero-image::before{
+.main::before{
    content: "";
    position: absolute;
-   bottom: 0;
-   left: 0;
-   height: 300px;
-   width: 300px;
+   left: 50%;
+   top: 30%;
+   height: 400px;
+   width: 400px;
    border-radius: 100%;
-   background-color: #546DFF;
-   filter: blur(100px);
-   opacity: 0.35;
+   background-color: #546eff25;
+   filter: blur(60px);
 }
 
 .hero-image-arrow{
@@ -208,8 +207,15 @@ pre::before {
    margin-left: 40px;
 }
 
+.hero-image-arrow p{
+   margin-bottom: 50px;
+   color: rgba(255, 255, 255, 0.8);
+}
+
 .hero-image-arrow img{
-   margin-right: 8px;
+   user-select: none;
+   object-fit: contain;
+   transform: rotateZ(-15deg);
    -webkit-user-drag: none;
 }
 
@@ -360,7 +366,7 @@ pre::before {
 
 .card::before{
    z-index: 3;
-   background: radial-gradient(1000px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 20%);
+   background: radial-gradient(1500px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 20%);
 }
 
 .card > .card-border{
@@ -381,10 +387,36 @@ pre::before {
    margin: 1px;
    height: calc(100% - 2px);
    width: calc(100% - 2px);
+   padding: 12px;
+   padding-inline: 20px;
 }
 
 .card-content > img{
    height: 160px;
+}
+
+.card-content-text{
+   display: flex;
+   flex-direction: row;
+   align-items: flex-start;
+   width: 100%;
+}
+
+.card-content-text svg{
+   margin-right: 10px;
+}
+
+.card-content-text span{
+   font-size: 16px;
+   font-weight: 600;
+}
+
+.card-content-text p{
+   font-size: 14px;
+   font-weight: 500;
+   opacity: 0.5;
+   line-height: 1.5;
+   margin-top: 6px;
 }
 
 
