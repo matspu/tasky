@@ -911,11 +911,11 @@ body{
     opacity: 1;
     height: auto;
     overflow: hidden;
-    transform: translateY(10px);
-    
+    transform: translateY(10px);  
 }
+
 .dropdown-exit{
-    transition: all 0.1s ease;
+    transition: all 0.2s ease;
     opacity: 0;
     height: 0;
     overflow: hidden;

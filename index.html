@@ -1,213 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
-        <script defer src="script.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <title>tasky</title>
-    </head>
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>tasky</title>
+      <link rel="stylesheet" href="lp-style.css">
+      <script defer src="lp-script.js"></script>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+   </head>
 
-
-    <body> 
-
-        <!-- Side Navigation Bar -->
-        <div class="side-nav">
-            <div class="side-nav-header" onclick="">
-                <img src="images/Group 13.png">
-                <p>tasky</p>
+   <body>
+      <div id="blob"></div>
+         
+      <div class="nav-bar">
+         <div class="nav-bar-logo">
+            <img src="images/Group 13.png">
+            <p>tasky</p>
+         </div>
+         <button class="hero-button"><a href="app.html">Get Started</a></button>
+      </div>
+         
+      <div class="main">
+         <div style="display:flex; flex-direction:row; justify-content: center; align-items:center; height: 60%; width: 100%;">
+            <div class="hero-text">
+               <h1>Master Your Projects with Ease</h1>
+               <p>Experience smooth project management from start to finish with our hassle-free solution</p>
+               <button class="hero-button" style="margin-left: 0px; margin-top: 40px;"><a href="app.html">Get Started</a></button>
             </div>
 
-            <div style="display:flex; flex-direction:column; width:220px">
-                <ul class="projects-list"></ul>
-                <div class="new-project-container">
-                    <div class="new-project-label">
-                        <button class="new-project-button">
-                            <i class="bi bi-plus"></i>
-                            <img src="" >
-                        </button>
-                        <form>
-                            <input type="text" placeholder="New project" class="new-project-title" maxlength="13">
-                        </form> 
-                    </div>
-                    <div class="icon-select-container dropdown-exit">
-                        <button id="development-icon" class="icon-select"><img src="images/icons/bag.svg"></button>
-                        <button id="development-icon" class="icon-select"><img src="images/icons/book.svg"></button>
-                        <button id="development-icon" class="icon-select"><img src="images/icons/brush-3.svg"></button>
-                        <button id="development-icon" class="icon-select"><img src="images/icons/code.svg"></button>
-                        <button id="development-icon" class="icon-select"><img src="images/icons/document.svg"></button>
-                        <button id="development-icon" class="icon-select"><img src="images/icons/dollar-circle.svg"></button>
-                        <button id="development-icon" class="icon-select"><img src="images/icons/emoji-happy.svg"></button>
-                        <button id="development-icon" class="icon-select"><img src="images/icons/emoji-normal.svg"></button>
-                        <button id="development-icon" class="icon-select"><img src="images/icons/emoji-sad.svg"></button>
-                        <button id="development-icon" class="icon-select"><img src="images/icons/gallery.svg"></button>
-                        <button id="development-icon" class="icon-select"><img src="images/icons/game.svg"></button>
-                        <button id="development-icon" class="icon-select"><img src="images/icons/gift.svg"></button>
-                        <button id="development-icon" class="icon-select"><img src="images/icons/heart-circle.svg"></button>
-                        <button id="development-icon" class="icon-select"><img src="images/icons/house.svg"></button>
-                        <button id="development-icon" class="icon-select"><img src="images/icons/instagram.svg"></button>
-                        <button id="development-icon" class="icon-select"><img src="images/icons/music.svg"></button>
-                        <button id="development-icon" class="icon-select"><img src="images/icons/trend-up.svg"></button>
-                        <button id="development-icon" class="icon-select"><img src="images/icons/trash.svg"></button>
-                    </div>
-                </div>
+               <div class="hero-image">
+                  <div class="hero-image-card">
+                     <div style="display:flex; align-items: center; margin-left: 5px; margin-bottom: 20px;">
+                        <img src="images/icons/bag.svg" style="margin-right:10px; height:30px; width:30px;">
+                        <h3>Shopping</h3>
+                     </div>
+                           
+                     <label>
+                        <input type="checkbox" class="checkmark">
+                        <span class="checkbox">
+                           <i class="bi bi-check-lg"></i>
+                        </span>
+                        <div style="display:flex; justify-content:space-between; align-items: center; width:100%;">
+                           <p>Buy groceries🛒</p>
+                           <p style="margin-left:auto; font-size:12px; background-color:rgba(128, 128, 128, 0.199); padding: 2px 5px; border-radius: 7px;">Wed</p>
+                        </div>
+                     </label>
+                     <label>
+                        <input type="checkbox" class="checkmark">
+                        <span class="checkbox">
+                           <i class="bi bi-check-lg"></i>
+                        </span>
+                        <div style="display:flex; justify-content:space-between; align-items: center; width:100%;">
+                           <p>Order new shoes👞</p>
+                           <p
+                              style="margin-left:auto; font-size:12px; background-color:rgba(128, 128, 128, 0.199); padding: 2px 5px; border-radius: 7px;">
+                              12 Mar</p>
+                        </div>
+                     </label>
+                     <label>
+                        <input type="checkbox" class="checkmark">
+                        <span class="checkbox">
+                           <i class="bi bi-check-lg"></i>
+                        </span>
+                        <div style="display:flex; justify-content:space-between; align-items: center; width:100%;">
+                           <p>Restock cleaning supplies</p>
+                        </div>
+                     </label>
+                     
+                        
+                     <div class="group-tasks">
+                                    <div class="group-tasks-dropdown">
+                                       <span class="group-tasks-dropdown-arrow"><i class="bi bi-chevron-right"></i></span>
+                                       <span class="group-title">Baking 🍰</span>
+                                    </div>
+                                    <ul class="group-tasks-container">
+                                       <label>
+                                          <input type="checkbox" class="checkmark">
+                                          <span class="checkbox">
+                                             <i class="bi bi-check-lg"></i>
+                                          </span>
+                                          <div style="display:flex; justify-content:space-between; align-items: center; width:100%;">
+                                             <p>milk, butter, eggs</p>
+                                          </div>
+                                       </label>
+                                       <label>
+                                          <input type="checkbox" class="checkmark">
+                                          <span class="checkbox">
+                                             <i class="bi bi-check-lg"></i>
+                                          </span>
+                                          <div style="display:flex; justify-content:space-between; align-items: center; width:100%;">
+                                             <p>flour, sugar</p>
+                                          </div>
+                                       </label>
+                                    </ul>
+                     </div>
+                  </div>
+                  <div class="hero-image-arrow">
+                     <img src="images/hero arrow.png">
+                     <p>Try it out!</p>
+
+                  </div>
+               </div>
+
+         </div>
+
+         
+         
+         
+
+         <div id="cards">
+            <div class="card">
+               <div class="card-border"></div>
+               <div class="card-content">
+                  <img src="images/projects card.png">
+                  <div class="card-content-text">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="20" width="20" fill="currentColor"
+                        className="w-6 h-6">
+                        <path fillRule="evenodd"
+                           d="M3 6a3 3 0 013-3h2.25a3 3 0 013 3v2.25a3 3 0 01-3 3H6a3 3 0 01-3-3V6zm9.75 0a3 3 0 013-3H18a3 3 0 013 3v2.25a3 3 0 01-3 3h-2.25a3 3 0 01-3-3V6zM3 15.75a3 3 0 013-3h2.25a3 3 0 013 3V18a3 3 0 01-3 3H6a3 3 0 01-3-3v-2.25zm9.75 0a3 3 0 013-3H18a3 3 0 013 3V18a3 3 0 01-3 3h-2.25a3 3 0 01-3-3v-2.25z"
+                           clipRule="evenodd" />
+                     </svg>
+                     <div>
+                        <span>Project management</span>
+                        <p>Organize and manage projects effectively</p>
+                     </div>
+                  </div>
+               </div>
             </div>
-        </div>
-
-        <!-- Header -->
-        <div class="header">
-            <div class="header-container">
-                <img class="header-icon hide" src="">
-                <span class="header-title"></span>
+            <div class="card">
+               <div class="card-border"></div>
+               <div class="card-content">
+                  <img src="images/customization card.png">
+                  <div class="card-content-text">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="20" width="20" fill="currentColor" className="w-6 h-6">
+                        <path fillRule="evenodd"
+                           d="M2.25 4.125c0-1.036.84-1.875 1.875-1.875h5.25c1.036 0 1.875.84 1.875 1.875V17.25a4.5 4.5 0 11-9 0V4.125zm4.5 14.25a1.125 1.125 0 100-2.25 1.125 1.125 0 000 2.25z"
+                           clipRule="evenodd" />
+                        <path
+                           d="M10.719 21.75h9.156c1.036 0 1.875-.84 1.875-1.875v-5.25c0-1.036-.84-1.875-1.875-1.875h-.14l-8.742 8.743c-.09.089-.18.175-.274.257zM12.738 17.625l6.474-6.474a1.875 1.875 0 000-2.651L15.5 4.787a1.875 1.875 0 00-2.651 0l-.1.099V17.25c0 .126-.003.251-.01.375z" />
+                     </svg>
+                     <div>
+                        <span>Personalized Icons</span>
+                        <p>Customize project icons for a unique touch</p>
+                     </div>
+                  </div>
+               </div>
             </div>
-            <button class="delete-complete-tasks-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" className="w-6 h-6">
-                        <path fillRule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z" clipRule="evenodd" />
-                    </svg>                                           
-            complete</button>
-            <div class="new-element-dropdown">
-                <button class="new-element-button">Create<i class="bi bi-chevron-down"></i></button>
-                <div class="new-element-container dropdown-exit">
-                    <button class="new-group-button" onclick="newGroup()">
-                        <i class="bi bi-list-check"></i>                                                                     
-                    Group</button>
-                    <button class="new-note-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="18" width="18" fill="rgba(255, 255, 255, 0.8)" className="w-6 h-6">
-                            <path d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0016.5 9h-1.875a1.875 1.875 0 01-1.875-1.875V5.25A3.75 3.75 0 009 1.5H5.625z" />
-                            <path d="M12.971 1.816A5.23 5.23 0 0114.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 013.434 1.279 9.768 9.768 0 00-6.963-6.963z" />
-                        </svg> 
-                    Note</button>
-                </div>
+            <div class="card">
+               <div class="card-border"></div>
+               <div class="card-content">
+                  <img src="images/functionality card.png">
+                  <div class="card-content-text">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="20" width="20" fill="currentColor" className="w-6 h-6">
+                        <path fillRule="evenodd"
+                           d="M2.625 6.75a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0zm4.875 0A.75.75 0 018.25 6h12a.75.75 0 010 1.5h-12a.75.75 0 01-.75-.75zM2.625 12a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0zM7.5 12a.75.75 0 01.75-.75h12a.75.75 0 010 1.5h-12A.75.75 0 017.5 12zm-4.875 5.25a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0zm4.875 0a.75.75 0 01.75-.75h12a.75.75 0 010 1.5h-12a.75.75 0 01-.75-.75z"
+                           clipRule="evenodd" />
+                     </svg>
+                     <div>
+                        <span>Tasks, Groups & Motes</span>
+                        <p>Plan, coordinate, and document with essential tools</p>
+                     </div>
+                  </div>
+               </div>
             </div>
-        </div>
-
-        
-        
-
-        <!-- Main section -->
-        <div class="main-section">
-            <div class="new-task-panel">
-                <form class="new-task-panel-input">
-                    <button class="add-task-button" type="button">+</button>
-                    <input type="text" placeholder="Create a task" maxlength="70">
-                </form>
-                <form class="task-due-date-details">
-                    <i class="bi bi-calendar2-event-fill"></i>
-                    <input type="text" placeholder="Due date" maxlength="10">
-                </form> 
-            </div>
-            <ul class="tasks-container">
-                <div class="message-container">
-                    <img src="" class="message-image">  
-                    <p class="message-text"></p>
-                </div>
-            </ul>
-        </div>
-
-        
-
-        <!-- Templates --> 
-
-        <template id="edit-project-template">
-            <div class="edit-project-dropdown">
-                <button class="edit-project-button"><i class="bi bi-three-dots-vertical"></i></button>
-                <div class="edit-project-functions dropdown-exit">
-                    <button class="edit-project-title-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" className="w-6 h-6">
-                            <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z" />
-                        </svg> 
-                    Edit</button>
-                    <button class="delete-project-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" className="w-6 h-6">
-                            <path fillRule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z" clipRule="evenodd" />
-                        </svg>                                           
-                    Delete</button>
-                </div>
-            </div>
-        </template>
-
-        <template id="task-template">
-            <li class="task-panel">
-                <label>
-                    <input type="checkbox" class="checkmark">
-                    <span class="checkbox">
-                        <i class="bi bi-check-lg"></i>
-                    </span>
-                </label>
-                <p class="task-title editable-title"></p>
-                <div class="task-due-date">
-                    <p class="task-due-date-text"></p>
-                </div>
-            </li>
-        </template>
-
-        <template id="group-template">
-            <div class="group-tasks">
-                <div class="group-tasks-dropdown">
-                    <span class="group-tasks-dropdown-arrow"><i class="bi bi-chevron-right"></i></span>                
-                    <span class="group-title editable-title empty"></span>
-                    <span class="group-tasks-dropdown-plus">+</span>
-
-                    <button class="delete-group-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" className="w-6 h-6">
-                            <path fillRule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z" clipRule="evenodd" />
-                        </svg>                                           
-                    </button>
-                </div>
-                <ul class="group-tasks-container">
-                </ul>
-            </div>
-        </template>
-
-        <template id="group-task-template">
-            <li class="task-panel" style="margin-left:5px;">
-                <label>
-                    <input type="checkbox" class="checkmark">
-                    <span class="checkbox">
-                        <i class="bi bi-check-lg"></i>
-                    </span>
-                </label>
-                <p class="task-title group-task-title editable-title empty"></p>
-
-                <form class="group-task-due-date-details" style="width:auto;">
-                    <i class="bi bi-calendar2-event-fill"></i>
-                    <input class="group-task-title-input" type="text" placeholder="Due date" maxlength="10" style="display:none;">
-                </form>
-                <div class="task-due-date">
-                    <p class="task-due-date-text"></p>
-                </div>
-            </li>
-        </template>
-
-        <template id="note-template">
-            <div class="note-container">
-                <div style="display:flex; flex-direction:row; align-items:center;">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="note-icon" viewBox="0 0 24 24" height="18" width="18" fill="rgba(255, 255, 255, 0.8)" className="w-6 h-6">
-                        <path d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0016.5 9h-1.875a1.875 1.875 0 01-1.875-1.875V5.25A3.75 3.75 0 009 1.5H5.625z" />
-                        <path d="M12.971 1.816A5.23 5.23 0 0114.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 013.434 1.279 9.768 9.768 0 00-6.963-6.963z" />
-                    </svg>                  
-                    <span class="note-title editable-title empty"></span>  
-                    <button class="delete-note-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"
-                            className="w-6 h-6">
-                            <path fillRule="evenodd"
-                                d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z"
-                                clipRule="evenodd" />
-                        </svg>
-                    </button>
-                
-                </div>                 
-                <div class="note-dropdown hide">
-                    <textarea></textarea>
-                </div>
-            </div>
-        </template>
-
-
-
-    </body>
+         </div>
+      </div>
+      
+      
+   </body>
 </html>

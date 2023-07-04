@@ -78,22 +78,26 @@ body{
    margin: 0px;
 }
 
-.nav-bar button{
+.hero-button{
    display: flex;
    align-items: center;
-   height: 40px;
-   padding: 10px 0px;
-   background-color: rgba(255, 255, 255, 0.219);
-   border: 1px solid rgba(255, 255, 255, 0.445);
+   padding: 0px;
+   background-color: rgba(255, 255, 255, 0.137);
+   border: none;
    border-radius: 10px;
    color: white;
    cursor: pointer;
    margin-left: auto;
+   transition: all 0.25s ease;
+}
+
+.hero-button:hover{
+   background-color: rgba(255, 255, 255, 0.226);
 }
 
 .nav-bar a{
    line-height: 40px;
-   width: 95px;
+   width: 110px;
    color: white;
    text-decoration: none;
 }
@@ -120,7 +124,7 @@ body{
 
 .hero-text h1{
    font-size: 54px;
-   background: linear-gradient(to bottom right,#4c67ff, #72abff);
+   background: linear-gradient(to bottom right, #3d5aff 10%, #a9cbff);
    -webkit-background-clip: text;
    -webkit-text-fill-color: transparent;
 }
@@ -132,22 +136,11 @@ body{
    color: rgba(255, 255, 255, 0.384);
 }
 
-.hero-text button {
-   display: flex;
-   align-items: center;
-   height: 40px;
-   padding: 10px 0px;
-   background-color: rgba(255, 255, 255, 0.219);
-   border: 1px solid rgba(255, 255, 255, 0.445);
-   border-radius: 10px;
-   color: white;
-   cursor: pointer;
-   margin-top: 40px;
-}
+
 
 .hero-text a {
    line-height: 40px;
-   width: 95px;
+   width: 110px;
    color: white;
    text-decoration: none;
 }
@@ -190,6 +183,7 @@ pre::before {
    padding: 20px;
    margin-left: auto;
 }
+
 
 .main::before{
    content: "";
